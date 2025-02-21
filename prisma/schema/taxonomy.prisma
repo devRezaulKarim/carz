@@ -1,0 +1,43 @@
+model Make {
+    id          Int          @id @default(autoincrement())
+    name        String       @unique
+    image       String
+    models      Model[]
+    classifieds Classified[]
+    createdAt   DateTime     @default(now()) @map("created_At")
+    updatedAt   DateTime     @updatedAt @map("updated_At")
+
+    @@map("makes")
+}
+
+model Model {
+    id     Int    @id @default(autoincrement())
+    name   String
+    makeId Int    @map("make_id")
+    make   Make   @relation(fields: [makeId], references: [id], onDelete: Cascade)
+    modelVariants ModelVariant[]
+    classifieds   Classified[]
+
+    createdAt DateTime @default(now()) @map("created_At")
+    updatedAt DateTime @updatedAt @map("updated_At")
+
+    @@unique([makeId, name])
+
+    @@map("models")
+}
+
+model ModelVariant {
+    id          Int          @id @default(autoincrement())
+    name        String
+    modelId     Int          @map("model_id")
+    yearStart   Int          @map("year_start")
+    yearEnd     Int          @map("year_end")
+    model       Model        @relation(fields: [modelId], references: [id], onDelete: Cascade)
+    classifieds Classified[]
+
+    createdAt DateTime @default(now()) @map("created_At")
+    updatedAt DateTime @updatedAt @map("updated_At")
+
+    @@unique([modelId, name])
+    @@map("model_variants")
+}
