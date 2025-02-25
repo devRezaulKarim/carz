@@ -60,6 +60,11 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        heading:
+          "var(--font-heading), ui-serif, Georgia, Cambria, Cambria, Times New Roman, serif",
+        body: "var(--font-body), ui-sans, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Noto Color Emoji",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

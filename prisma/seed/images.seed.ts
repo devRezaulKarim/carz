@@ -1,6 +1,6 @@
+import { imageSource } from "../../src/config/constants";
 import { faker } from "@faker-js/faker";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { imageSource } from "../../config/constants";
 import { createPngDataUri } from "unlazy/thumbhash";
 
 export default async function seedImages(prisma: PrismaClient) {

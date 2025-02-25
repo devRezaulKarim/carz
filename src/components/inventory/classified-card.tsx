@@ -1,0 +1,99 @@
+import { routes } from "@/config/routes";
+import { ClassifiedWithImage } from "@/config/types";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import HTMLParser from "../shared/html-parser";
+import { Cog, Fuel, GaugeCircle, Paintbrush } from "lucide-react";
+
+interface ClassifiedCardProps {
+  classified: ClassifiedWithImage;
+}
+
+const formatNumber = (
+  num: number | null,
+  options?: Intl.NumberFormatOptions,
+) => {
+  if (!num) return "0";
+  return new Intl.NumberFormat("en-US", options).format(num);
+};
+
+const getKeyClassifiedInfo = (classified: ClassifiedWithImage) => {
+  return [
+    {
+      id: "odoReading",
+      icon: <GaugeCircle className="h-4 w-4" />,
+      value: `${formatNumber(classified?.odoReading)} ${classified?.odoUnit === "MILES" ? "mi" : "km"}`,
+    },
+    {
+      id: "transmission",
+      icon: <Cog className="h-4 w-4" />,
+      value: classified?.transmission.toLowerCase(),
+    },
+    {
+      id: "fuelType",
+      icon: <Fuel className="h-4 w-4" />,
+      value: classified?.fuelType.toLowerCase(),
+    },
+    {
+      id: "color",
+      icon: <Paintbrush className="h-4 w-4" />,
+      value: classified?.color.toLowerCase(),
+    },
+  ];
+};
+
+const ClassifiedCard = ({ classified }: ClassifiedCardProps) => {
+  return (
+    <div className="relative flex flex-col overflow-hidden rounded-md bg-white shadow-md">
+      <div className="relative aspect-[3/2]">
+        <Link href={routes.singleClassified(classified.slug)}>
+          <Image
+            placeholder="blur"
+            blurDataURL={classified.images[0].blurhash}
+            src={classified.images[0].src}
+            alt={classified.images[0].alt}
+            fill={true}
+            quality={25}
+          />
+        </Link>
+        <div className="absolute right-[14px] top-[10px] rounded bg-primary px-2 py-1 font-bold text-slate-50">
+          <p className="text-xs font-semibold lg:text-base xl:text-lg">
+            {classified.price}
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col space-y-3 p-4">
+        <div>
+          <Link
+            href={routes.singleClassified(classified.slug)}
+            className="line-clamp-1 text-sm font-semibold transition-colors hover:text-primary md:text-base lg:text-lg"
+          >
+            {classified.title}
+          </Link>
+          {classified.description && (
+            <div className="line-clamp-2 text-xs text-gray-500 md:text-sm xl:text-base">
+              <HTMLParser html={classified.description} />
+              &nbsp;{" "}
+              {/* used to equalize the spacing for each card in the grid*/}
+            </div>
+          )}
+          <ul className="grid w-full grid-cols-1 grid-rows-4 items-center justify-between text-xs text-gray-600 md:grid-cols-2 md:grid-rows-2 md:text-sm xl:flex">
+            {getKeyClassifiedInfo(classified)
+              .filter((val) => val)
+              .map(({ id, icon, value }) => (
+                <li
+                  key={id}
+                  className={`flex items-center gap-[6px] font-semibold xl:flex-col ${id !== "odoReading" ? "capitalize" : ""}`}
+                >
+                  {icon} {value}
+                </li>
+              ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ClassifiedCard;
