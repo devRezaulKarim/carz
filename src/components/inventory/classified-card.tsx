@@ -1,10 +1,11 @@
 import { routes } from "@/config/routes";
-import { ClassifiedWithImage } from "@/config/types";
+import { ClassifiedWithImage, MultiStepFormEnum } from "@/config/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import HTMLParser from "../shared/html-parser";
 import { Cog, Fuel, GaugeCircle, Paintbrush } from "lucide-react";
+import { Button } from "../ui/button";
 
 interface ClassifiedCardProps {
   classified: ClassifiedWithImage;
@@ -64,33 +65,53 @@ const ClassifiedCard = ({ classified }: ClassifiedCardProps) => {
         </div>
       </div>
       <div className="flex flex-col space-y-3 p-4">
-        <div>
+        <Link
+          href={routes.singleClassified(classified.slug)}
+          className="line-clamp-1 text-sm font-semibold transition-colors hover:text-primary md:text-base lg:text-lg"
+        >
+          {classified.title}
+        </Link>
+        {classified.description && (
+          <div className="line-clamp-2 text-xs text-gray-500 md:text-sm xl:text-base">
+            <HTMLParser html={classified.description} />
+            &nbsp; {/* used to equalize the spacing for each card in the grid*/}
+          </div>
+        )}
+        <ul className="grid w-full grid-cols-1 grid-rows-4 items-center justify-between text-xs text-gray-600 md:grid-cols-2 md:grid-rows-2 md:text-sm xl:flex">
+          {getKeyClassifiedInfo(classified)
+            .filter((val) => val)
+            .map(({ id, icon, value }) => (
+              <li
+                key={id}
+                className={`flex items-center gap-[6px] font-semibold xl:flex-col ${id !== "odoReading" ? "capitalize" : ""}`}
+              >
+                {icon} {value}
+              </li>
+            ))}
+        </ul>
+      </div>
+      <div className="flex w-full flex-col space-y-2 p-4 lg:flex-row lg:gap-x-2 lg:space-y-0">
+        <Button
+          className="h-full flex-1 py-2 text-xs transition-colors hover:border-white hover:bg-primary hover:text-white md:text-sm lg:py-2 xl:text-base"
+          asChild
+          variant="outline"
+          size="sm"
+        >
           <Link
-            href={routes.singleClassified(classified.slug)}
-            className="line-clamp-1 text-sm font-semibold transition-colors hover:text-primary md:text-base lg:text-lg"
+            href={routes.reserve(classified.slug, MultiStepFormEnum.WELCOME)}
           >
-            {classified.title}
+            Reserve
           </Link>
-          {classified.description && (
-            <div className="line-clamp-2 text-xs text-gray-500 md:text-sm xl:text-base">
-              <HTMLParser html={classified.description} />
-              &nbsp;{" "}
-              {/* used to equalize the spacing for each card in the grid*/}
-            </div>
-          )}
-          <ul className="grid w-full grid-cols-1 grid-rows-4 items-center justify-between text-xs text-gray-600 md:grid-cols-2 md:grid-rows-2 md:text-sm xl:flex">
-            {getKeyClassifiedInfo(classified)
-              .filter((val) => val)
-              .map(({ id, icon, value }) => (
-                <li
-                  key={id}
-                  className={`flex items-center gap-[6px] font-semibold xl:flex-col ${id !== "odoReading" ? "capitalize" : ""}`}
-                >
-                  {icon} {value}
-                </li>
-              ))}
-          </ul>
-        </div>
+        </Button>
+        <Button
+          className="h-full flex-1 py-2 text-xs md:text-sm lg:py-2 xl:text-base"
+          asChild
+          size="sm"
+        >
+          <Link href={routes.singleClassified(classified.slug)}>
+            View details
+          </Link>
+        </Button>
       </div>
     </div>
   );

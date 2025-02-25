@@ -90,7 +90,7 @@ enum Color {
     ORANGE
     PINK
     PURPLE
-    odoReadingSILVER
+    SILVER
     WHITE
     YELLOW
 }

@@ -13,7 +13,6 @@ const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
 const InventoryPage = async (props: PageProps) => {
   const searchParams = await props.searchParams;
   const classifieds = await getInventory(searchParams);
-  console.log(classifieds);
   return (
     <>
       <ClassifiedList classifieds={classifieds} />
