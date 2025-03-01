@@ -38,10 +38,10 @@ export const NewsletterForm = () => {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-primary">
+      <h3 className="text-base font-bold text-primary lg:text-lg xl:text-xl">
         Subscribe to our inventory update
       </h3>
-      <p className="text-gray-700">
+      <p className="text-sm text-gray-700 xl:text-base">
         {" "}
         Enter your details to receive new stock updates.
       </p>

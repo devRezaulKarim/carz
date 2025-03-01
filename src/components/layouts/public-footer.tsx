@@ -33,7 +33,7 @@ export const PublicFooter = () => {
   return (
     <footer className="bg-gray-100 px-8 py-8 lg:px-0">
       <div className="container mx-auto grid grid-cols-1 gap-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Link href={routes.home} className="flex items-center">
@@ -60,7 +60,7 @@ export const PublicFooter = () => {
                 <li key={link.id}>
                   <Link
                     href={link.href}
-                    className="text-foreground hover:text-primary"
+                    className="text-sm text-foreground hover:text-primary lg:text-base"
                   >
                     {link.label}
                   </Link>
