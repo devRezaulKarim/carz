@@ -9,6 +9,7 @@ import { z } from "zod";
 import { CLASSIFIED_PER_PAGE } from "@/config/constants";
 import { Sidebar } from "@/components/inventory/sidebar";
 import { ClassifiedStatus, Prisma } from "@prisma/client";
+import { DialogFilters } from "@/components/inventory/dialog-filters";
 
 const PageSchema = z
   .string()
@@ -162,14 +163,18 @@ const InventoryPage = async (props: PageProps) => {
             <h2 className="min-w-fit text-sm font-semibold md:text-base lg:text-xl">
               We have found {count} classifieds.
             </h2>
-            {/* <DialogFilter/> */}
+            <DialogFilters
+              minMaxValues={minMaxResult}
+              searchParams={searchParams}
+              count={count}
+            />
           </div>
 
           <CustomPagination
             baseURL={routes.inventory}
             totalPages={totalPages}
             styles={{
-              paginationRoot: "flex justify-end",
+              paginationRoot: "flex justify-end hidden lg:block",
               paginationLink: "border-none active:border",
               paginationLinkActive: "bg-primary text-white",
               paginationNext: "",
@@ -180,6 +185,18 @@ const InventoryPage = async (props: PageProps) => {
           <ClassifiedList
             classifieds={classifieds}
             favorites={favorites ? favorites.ids : []}
+          />
+
+          <CustomPagination
+            baseURL={routes.inventory}
+            totalPages={totalPages}
+            styles={{
+              paginationRoot: "flex justify-center lg:hidden pt-12",
+              paginationLink: "border-none active:border",
+              paginationLinkActive: "bg-primary text-white",
+              paginationNext: "",
+              paginationPrevious: "",
+            }}
           />
         </div>
       </div>

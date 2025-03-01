@@ -1,6 +1,6 @@
 "use client";
 import { routes } from "@/config/routes";
-import { AwaitedPageProps } from "@/config/types";
+import { SidebarProps } from "@/config/types";
 import {
   cn,
   formatBodyType,
@@ -22,57 +22,40 @@ import {
   CurrencyCode,
   FuelType,
   OdoUnit,
-  Prisma,
   Transmission,
   ULEZCompliance,
 } from "@prisma/client";
 import { Select } from "../ui/select";
 
 const MAX_SAFE_NUMBER = 21474836;
+export const defaultQueryStates = {
+  make: parseAsString.withDefault(""),
+  model: parseAsString.withDefault(""),
+  modelVariant: parseAsString.withDefault(""),
+  minYear: parseAsString.withDefault(""),
+  maxYear: parseAsString.withDefault(""),
+  minPrice: parseAsString.withDefault(""),
+  maxPrice: parseAsString.withDefault(""),
+  minReading: parseAsString.withDefault(""),
+  maxReading: parseAsString.withDefault(""),
+  currency: parseAsString.withDefault(""),
+  odoUnit: parseAsString.withDefault(""),
+  transmission: parseAsString.withDefault(""),
+  fuelType: parseAsString.withDefault(""),
+  bodyType: parseAsString.withDefault(""),
+  color: parseAsString.withDefault(""),
+  doors: parseAsString.withDefault(""),
+  seats: parseAsString.withDefault(""),
+  ulezCompliance: parseAsString.withDefault(""),
+};
 
-interface SidebarProps extends AwaitedPageProps {
-  minMaxValues: Prisma.GetClassifiedAggregateType<{
-    _min: {
-      year: true;
-      price: true;
-      odoReading: true;
-    };
-    _max: {
-      year: true;
-      price: true;
-      odoReading: true;
-    };
-  }>;
-}
 export const Sidebar = ({ minMaxValues, searchParams }: SidebarProps) => {
   const router = useRouter();
   const { _min, _max } = minMaxValues;
   const [filterCount, setFilterCount] = useState(0);
-  const [queryStates, setQueryStates] = useQueryStates(
-    {
-      make: parseAsString.withDefault(""),
-      model: parseAsString.withDefault(""),
-      modelVariant: parseAsString.withDefault(""),
-      minYear: parseAsString.withDefault(""),
-      maxYear: parseAsString.withDefault(""),
-      minPrice: parseAsString.withDefault(""),
-      maxPrice: parseAsString.withDefault(""),
-      minReading: parseAsString.withDefault(""),
-      maxReading: parseAsString.withDefault(""),
-      currency: parseAsString.withDefault(""),
-      odoUnit: parseAsString.withDefault(""),
-      transmission: parseAsString.withDefault(""),
-      fuelType: parseAsString.withDefault(""),
-      bodyType: parseAsString.withDefault(""),
-      color: parseAsString.withDefault(""),
-      doors: parseAsString.withDefault(""),
-      seats: parseAsString.withDefault(""),
-      ulezCompliance: parseAsString.withDefault(""),
-    },
-    {
-      shallow: false,
-    },
-  );
+  const [queryStates, setQueryStates] = useQueryStates(defaultQueryStates, {
+    shallow: false,
+  });
 
   useEffect(() => {
     const filterCount = Object.entries(

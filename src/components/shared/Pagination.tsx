@@ -73,7 +73,7 @@ export const CustomPagination = ({
 
   return (
     <PaginationRoot className={styles.paginationRoot}>
-      <PaginationContent className="lg:gap-4">
+      <PaginationContent className="justify-end lg:gap-4">
         <PaginationItem>
           <PaginationPrevious
             className={cn(
