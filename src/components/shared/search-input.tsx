@@ -46,7 +46,11 @@ export const SearchInput = ({ className, ...rest }: SearchInputProps) => {
   };
 
   return (
-    <form action="" className="relative flex-1">
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      action=""
+      className="relative flex-1"
+    >
       <SearchIcon className="absolute left-[10px] top-3 h-4 w-4 text-gray-500" />
       <Input
         ref={inputRef}

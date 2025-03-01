@@ -109,7 +109,6 @@ export const CustomPagination = ({
           (_, i) => i + visibleRange.start,
         ).map((pageNumber) => {
           const isActive = pageNumber === currentPage;
-          console.log(isActive)
           let rel = "";
           if (pageNumber === currentPage - 1) rel = "prev";
           if (pageNumber === currentPage + 1) rel = "next";

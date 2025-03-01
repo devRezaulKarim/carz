@@ -10,19 +10,12 @@ import { Button } from "../ui/button";
 import { FavoriteButton } from "./favorite-button";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { formatNumber, formatPrice } from "@/lib/utils";
 
 interface ClassifiedCardProps {
   classified: ClassifiedWithImage;
   favorites: number[];
 }
-
-const formatNumber = (
-  num: number | null,
-  options?: Intl.NumberFormatOptions,
-) => {
-  if (!num) return "0";
-  return new Intl.NumberFormat("en-US", options).format(num);
-};
 
 const getKeyClassifiedInfo = (classified: ClassifiedWithImage) => {
   return [
@@ -88,8 +81,11 @@ const ClassifiedCard = ({ classified, favorites }: ClassifiedCardProps) => {
               id={classified.id}
             />
             <div className="absolute right-[14px] top-[10px] rounded bg-primary px-2 py-1 font-bold text-slate-50">
-              <p className="text-xs font-semibold lg:text-base xl:text-lg">
-                {classified.price}
+              <p className="text-xs font-semibold lg:text-base">
+                {formatPrice({
+                  price: Number(classified.price),
+                  currency: classified.currency,
+                })}
               </p>
             </div>
           </div>

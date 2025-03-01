@@ -9,7 +9,7 @@ interface ClassifiedsListProps {
 
 const ClassifiedList = ({ classifieds, favorites }: ClassifiedsListProps) => {
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-2 xl:grid-cols-3">
       {classifieds.map((classified) => {
         return (
           <ClassifiedCard
