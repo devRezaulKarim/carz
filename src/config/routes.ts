@@ -7,4 +7,5 @@ export const routes = {
     `/inventory/${slug}.reserve?step=${step}`,
   favorites: "/favorites",
   inventory: "/inventory",
+  notAvailable: (slug: string) => `/inventory/${slug}/not-available`,
 };

@@ -127,7 +127,7 @@ const SubscribeNowBtn = () => {
   return (
     <Button
       type="submit"
-      className="w-full font-bold uppercase"
+      className="w-full font-bold uppercase tracking-widest"
       disabled={pending}
     >
       {pending && (
