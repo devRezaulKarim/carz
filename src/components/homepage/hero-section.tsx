@@ -51,7 +51,7 @@ export const HeroSection = async ({ searchParams }: AwaitedPageProps) => {
             Discover your dream car today
           </h2>
         </div>
-        <div className="mx-auto w-full max-w-md bg-white p-6 shadow-lg sm:rounded-xl">
+        <div className="mx-auto w-full max-w-md bg-white p-6 shadow-lg rounded-xl">
           <div className="space-y-4">
             <div className="flex w-full flex-col gap-x-4 space-y-2">
               <HomepageFilters
