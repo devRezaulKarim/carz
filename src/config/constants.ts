@@ -64,6 +64,8 @@ export const imageSource = {
   ],
   carLineup:
     "https://i.ibb.co.com/FqCcbnBp/2022-audi-tt-rs-coupe-heritage-edition-4k-8k-1920x1080.jpg",
+  featured: "https://i.ibb.co.com/k2PYxCRG/view-3d-car-1.jpg",
+  // featured: "https://i.ibb.co.com/N6Yf2gnC/feature-car.jpg",
 };
 export const CLASSIFIED_PER_PAGE = 10;
 

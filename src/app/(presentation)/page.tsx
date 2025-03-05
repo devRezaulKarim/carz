@@ -1,3 +1,4 @@
+import { FeaturesSection } from "@/components/homepage/features-section";
 import { HeroSection } from "@/components/homepage/hero-section";
 import { PageProps } from "@/config/types";
 
@@ -6,6 +7,7 @@ export default async function Home(props: PageProps) {
   return (
     <div className="min-h-screen w-full bg-background">
       <HeroSection searchParams={searchParams} />
+      <FeaturesSection />
     </div>
   );
 }
