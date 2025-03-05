@@ -17,12 +17,12 @@ export const SwiperButtons = ({
         rel="prev"
         size="icon"
         className={cn(
-          prevClassName,
           "swiper-button-prev absolute top-1/2 z-10 flex -translate-y-1/2 cursor-pointer items-center justify-center rounded-full",
+          prevClassName,
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        <ChevronLeft className="!h-8 !w-8" color="black" />
+        <ChevronLeft className="!h-6 !w-6" color="black" />
       </Button>
       <Button
         variant="ghost"
@@ -30,12 +30,12 @@ export const SwiperButtons = ({
         rel="next"
         size="icon"
         className={cn(
-          nextClassName,
           "swiper-button-next absolute top-1/2 z-10 flex -translate-y-1/2 cursor-pointer items-center justify-center rounded-full",
+          nextClassName,
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        <ChevronRight className="!h-8 !w-8" color="black" />
+        <ChevronRight className="!h-6 !w-6" color="black" />
       </Button>
     </>
   );
