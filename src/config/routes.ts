@@ -4,7 +4,7 @@ export const routes = {
   home: "/",
   singleClassified: (slug: string) => `/inventory/${slug}`,
   reserve: (slug: string, step: MultiStepFormEnum) =>
-    `/inventory/${slug}.reserve?step=${step}`,
+    `/inventory/${slug}/reserve?step=${step}`,
   favorites: "/favorites",
   inventory: "/inventory",
   notAvailable: (slug: string) => `/inventory/${slug}/not-available`,

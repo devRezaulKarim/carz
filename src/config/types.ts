@@ -24,6 +24,14 @@ export enum MultiStepFormEnum {
   SUBMIT_DETAILS = 3,
 }
 
+export interface MultiStepFormComponentProps extends AwaitedPageProps {
+  classified: Prisma.ClassifiedGetPayload<{
+    include: {
+      make: true;
+    };
+  }>;
+}
+
 export interface Favorites {
   ids: number[];
 }
