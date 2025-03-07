@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -18,13 +17,7 @@ import { Button } from "../ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { routes } from "@/config/routes";
 import { generateDateOptions, generateTimeOptions } from "@/lib/utils";
-
-const SelectDateSchema = z.object({
-  handoverDate: z.string({ message: "Handover Date is required!" }),
-  handoverTime: z.string({ message: "Handover Time is required!" }),
-});
-
-type SelectDateType = z.infer<typeof SelectDateSchema>;
+import { SelectDateSchema, SelectDateType } from "@/schemas/multi-step-form.schema";
 
 export const SelectDate = ({
   searchParams,
@@ -45,6 +38,7 @@ export const SelectDate = ({
         : handoverTime,
     },
   });
+  console.log({ handoverDate, handoverTime });
   const [isPending, startTransition] = useTransition();
   const [isPrevPending, startPrevTransition] = useTransition();
 
@@ -66,6 +60,7 @@ export const SelectDate = ({
 
       const url = new URL(
         routes.reserve(classified.slug, MultiStepFormEnum.SUBMIT_DETAILS),
+        process.env.NEXT_PUBLIC_APP_URL,
       );
       url.searchParams.set(
         "handoverDate",

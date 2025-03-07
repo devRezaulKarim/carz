@@ -4,7 +4,7 @@ model Customer {
     lastName          String              @map("last_name")
     email             String
     mobile            String?
-    bookingDate       DateTime?            @map("booking_date")
+    bookingDate       DateTime?           @map("booking_date")
     termsAccepted     Boolean             @map("terms_accepted")
     status            CustomerStatus      @default(INTERESTED)
     classifiedId      Int?                @map("classified_id")

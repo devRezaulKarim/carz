@@ -7,13 +7,13 @@ export const FormHeader = () => {
   const params = useSearchParams();
   const steps = [
     { id: "1", title: "Welcome" },
-    { id: "2", title: "Select Handover Date & Time" },
+    { id: "2", title: "Select Handover Date" },
     { id: "3", title: "Submit Details" },
   ];
   return (
     <div className="flex justify-between bg-primary p-4 shadow-lg">
       <div className="flex flex-1 flex-col justify-between">
-        <h1 className="text-3xl font-bold text-white">
+        <h1 className="text-xl font-bold text-white md:text-2xl xl:text-3xl">
           {steps.find(({ id }) => params.get("step") === id)?.title}
         </h1>
       </div>

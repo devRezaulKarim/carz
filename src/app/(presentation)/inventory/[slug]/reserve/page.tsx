@@ -1,19 +1,15 @@
 import { MultiStepFormEnum, PageProps } from "@/config/types";
 import { notFound } from "next/navigation";
-import { z } from "zod";
 import { db } from "../../../../../../prisma/db";
 import { Welcome } from "@/components/reserve/welcome";
 import { SelectDate } from "@/components/reserve/select-date";
-
-const MultiStepFormSchema = z.object({
-  step: z.nativeEnum(MultiStepFormEnum),
-  slug: z.string(),
-});
+import { SubmitDetails } from "@/components/reserve/submit-details";
+import { MultiStepFormSchema } from "@/schemas/multi-step-form.schema";
 
 const MAP_STEP_TO_COMPONENT = {
   [MultiStepFormEnum.WELCOME]: Welcome,
   [MultiStepFormEnum.SELECT_DATE]: SelectDate,
-  [MultiStepFormEnum.SUBMIT_DETAILS]: null,
+  [MultiStepFormEnum.SUBMIT_DETAILS]: SubmitDetails,
 };
 
 export default async function ReservePage(props: PageProps) {

@@ -13,7 +13,7 @@ import {
 } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -258,4 +258,13 @@ export const generateTimeOptions = () => {
     });
   }
   return times;
+};
+
+export const formatDate = (date: string, time: string) => {
+  const parsedDate = parse(date, "dd MMM yyyy", new Date());
+  const parsedTime = parse(time, "hh:mm aa", new Date());
+
+  parsedDate.setHours(parsedTime.getHours(), parsedTime.getMinutes(), 0, 0);
+
+  return parsedDate;
 };
