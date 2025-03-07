@@ -13,6 +13,7 @@ import {
 } from "@prisma/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -221,4 +222,40 @@ export const buildClassifiedFilterQuery = (
     }),
     ...mapParamsToFields,
   };
+};
+
+export const generateDateOptions = () => {
+  const today = new Date();
+  const dates = [];
+  for (let day = 0; day <= 30; day++) {
+    const date = new Date(today);
+    date.setDate(date.getDate() + day);
+    dates.push({
+      label: format(date, "dd MMM yyyy"),
+      value: format(date, "dd MMM yyyy"),
+    });
+  }
+  return dates;
+};
+
+export const generateTimeOptions = () => {
+  const times = [];
+  const startHour = 10;
+  const endHour = 20;
+  for (let hour = startHour; hour <= endHour; hour++) {
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    date.setHours(hour);
+    date.setMinutes(0);
+    const formattedTime = date.toLocaleTimeString("en-BN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    times.push({
+      label: formattedTime,
+      value: formattedTime,
+    });
+  }
+  return times;
 };

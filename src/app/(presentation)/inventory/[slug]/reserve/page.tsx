@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { z } from "zod";
 import { db } from "../../../../../../prisma/db";
 import { Welcome } from "@/components/reserve/welcome";
+import { SelectDate } from "@/components/reserve/select-date";
 
 const MultiStepFormSchema = z.object({
   step: z.nativeEnum(MultiStepFormEnum),
@@ -11,7 +12,7 @@ const MultiStepFormSchema = z.object({
 
 const MAP_STEP_TO_COMPONENT = {
   [MultiStepFormEnum.WELCOME]: Welcome,
-  [MultiStepFormEnum.SELECT_DATE]: null,
+  [MultiStepFormEnum.SELECT_DATE]: SelectDate,
   [MultiStepFormEnum.SUBMIT_DETAILS]: null,
 };
 
