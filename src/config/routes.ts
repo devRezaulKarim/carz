@@ -9,4 +9,6 @@ export const routes = {
   favorites: "/favorites",
   inventory: "/inventory",
   notAvailable: (slug: string) => `/inventory/${slug}/not-available`,
+  signIn: "/auth/sign-in",
+  challenge: "/auth.challenge",
 };

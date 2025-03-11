@@ -80,4 +80,9 @@ export const navLinks = [
     href: routes.inventory,
     label: "Inventory",
   },
+  {
+    id: 3,
+    href: routes.signIn,
+    label: "Admin",
+  },
 ];

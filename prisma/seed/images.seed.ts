@@ -8,24 +8,23 @@ export default async function seedImages(prisma: PrismaClient) {
 
   const classifiedIds = classifieds.map((classified) => classified.id);
   for (const classifiedId of classifiedIds) {
-    for (let i = 0; i < 2; i++) {
-      const index = Math.floor(
-        Math.random() * imageSource.classifiedPlaceholders.length,
-      );
-      const image: Prisma.ImageCreateInput = {
-        src: imageSource.classifiedPlaceholders[index].placeholder,
-        alt: faker.lorem.words(3),
-        classified: {
-          connect: {
-            id: classifiedId,
+    const imgs = [...imageSource.classifiedPlaceholders]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 2);
+    imgs.forEach((img) => {
+      (async () => {
+        const image: Prisma.ImageCreateInput = {
+          src: img.placeholder,
+          alt: faker.lorem.words(3),
+          classified: {
+            connect: {
+              id: classifiedId,
+            },
           },
-        },
-        blurhash: createPngDataUri(
-          imageSource.classifiedPlaceholders[index].blurhash,
-        ),
-      };
-
-      await prisma.image.create({ data: image });
-    }
+          blurhash: createPngDataUri(img.blurhash),
+        };
+        await prisma.image.create({ data: image });
+      })();
+    });
   }
 }
