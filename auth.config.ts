@@ -1,0 +1,106 @@
+import { NextAuthConfig, User } from "next-auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { db } from "./prisma/db";
+import { SESSION_MAX_AGE } from "@/config/constants";
+import CredentialsProvider from "@auth/core/providers/credentials";
+import ResendProvider from "@auth/core/providers/resend";
+import { SignInSchema } from "@/schemas/sign-in-schema";
+import { comparePassword } from "@/lib/bcrypt";
+import { routes } from "@/config/routes";
+import { issueChallenge } from "@/lib/otp";
+import { AdapterUser } from "@auth/core/adapters";
+
+export const config = {
+  adapter: PrismaAdapter(db),
+  useSecureCookies: false,
+  trustHost: true,
+  session: {
+    strategy: "database",
+    maxAge: SESSION_MAX_AGE / 1000,
+  },
+  providers: [
+    CredentialsProvider({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async function (credentials): Promise<User | null> {
+        const { data, success, error } = SignInSchema.safeParse(credentials);
+
+        if (!success) {
+          console.log({ error });
+          return null;
+        }
+        try {
+          const user = await db.user.findUnique({
+            where: { email: data.email },
+            select: {
+              hashedPassword: true,
+              id: true,
+              email: true,
+            },
+          });
+
+          if (!user) return null;
+
+          const isPasswordMatch = await comparePassword(
+            data.password,
+            user.hashedPassword,
+          );
+          if (!isPasswordMatch) return null;
+
+          //issue a challenge
+          await issueChallenge(user.id, user.email);
+          const dbUser = db.user.findUnique({
+            where: {
+              id: user.id,
+            },
+            omit: {
+              hashedPassword: true,
+            },
+          });
+          return { ...dbUser, requires2FA: true };
+        } catch (error) {
+          console.log({ error });
+          return null;
+        }
+      },
+    }),
+    ResendProvider({}),
+  ],
+  pages: {
+    signIn: routes.signIn,
+    signOut: "/auth/sign-out",
+    error: "/auth/error",
+  },
+  callbacks: {
+    async jwt({ user, token }) {
+      const session = await db.session.create({
+        data: {
+          expires: new Date(Date.now() + SESSION_MAX_AGE),
+          sessionToken: crypto.randomUUID(),
+          userId: user.id as string,
+          requires2FA: user.requires2FA as boolean,
+        },
+      });
+      if (!session) return null;
+
+      if (user) token.requires2FA = user.requires2FA;
+
+      token.id = session.sessionToken;
+      token.exp = session.expires.getTime();
+
+      return token;
+    },
+
+    async session({ session }) {
+      session.user = {} as AdapterUser;
+
+      return session;
+    },
+  },
+
+  jwt: {
+    encode: async ({ token }) => token?.id as string,
+  },
+} as NextAuthConfig;

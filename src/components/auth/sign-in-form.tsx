@@ -1,6 +1,5 @@
 "use client";
 
-import { routes } from "@/config/routes";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useRef } from "react";
 import { Label } from "../ui/label";
@@ -8,9 +7,10 @@ import { Input } from "../ui/input";
 import { useFormStatus } from "react-dom";
 import { CircleCheckIcon, CircleX, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
+import { signInAction } from "@/actions/sign-in";
 
 export const SignInForm = () => {
-  const [state, formAction] = useActionState(null, {
+  const [state, formAction] = useActionState(signInAction, {
     success: false,
     message: "",
   });
@@ -19,7 +19,7 @@ export const SignInForm = () => {
   useEffect(() => {
     if (state.success && formRef.current) {
       router.refresh();
-      router.push(routes.challenge);
+      // router.push(routes.challenge);
     }
   }, [state, router]);
 

@@ -80,9 +80,6 @@ export const navLinks = [
     href: routes.inventory,
     label: "Inventory",
   },
-  {
-    id: 3,
-    href: routes.signIn,
-    label: "Admin",
-  },
 ];
+
+export const SESSION_MAX_AGE = 7 * 24 * 60 * 60 * 1000; //7 days in ms
