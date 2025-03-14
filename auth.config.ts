@@ -1,6 +1,6 @@
 import { NextAuthConfig, User } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { db } from "./prisma/db";
+import { prisma } from "./prisma/prisma";
 import { SESSION_MAX_AGE } from "@/config/constants";
 import CredentialsProvider from "@auth/core/providers/credentials";
 import ResendProvider from "@auth/core/providers/resend";
@@ -11,7 +11,7 @@ import { issueChallenge } from "@/lib/otp";
 import { AdapterUser } from "@auth/core/adapters";
 
 export const config = {
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(prisma),
   useSecureCookies: false,
   trustHost: true,
   session: {
@@ -32,7 +32,7 @@ export const config = {
           return null;
         }
         try {
-          const user = await db.user.findUnique({
+          const user = await prisma.user.findUnique({
             where: { email: data.email },
             select: {
               hashedPassword: true,
@@ -51,7 +51,7 @@ export const config = {
 
           //issue a challenge
           await issueChallenge(user.id, user.email);
-          const dbUser = db.user.findUnique({
+          const dbUser = await prisma.user.findUnique({
             where: {
               id: user.id,
             },
@@ -75,7 +75,7 @@ export const config = {
   },
   callbacks: {
     async jwt({ user, token }) {
-      const session = await db.session.create({
+      const session = await prisma.session.create({
         data: {
           expires: new Date(Date.now() + SESSION_MAX_AGE),
           sessionToken: crypto.randomUUID(),
@@ -93,8 +93,8 @@ export const config = {
       return token;
     },
 
-    async session({ session }) {
-      session.user = {} as AdapterUser;
+    async session({ session, user }) {
+      session.user = { id: session.userId, email: user.email } as AdapterUser;
 
       return session;
     },

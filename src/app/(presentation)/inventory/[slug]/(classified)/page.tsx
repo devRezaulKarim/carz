@@ -1,6 +1,6 @@
 import { PageProps } from "@/config/types";
 import { notFound, redirect } from "next/navigation";
-import { db } from "../../../../../../prisma/db";
+import { prisma } from "../../../../../../prisma/prisma";
 import { ClassifiedStatus } from "@prisma/client";
 import { routes } from "@/config/routes";
 import { ClassifiedView } from "@/components/classified/classified-view";
@@ -12,7 +12,7 @@ export default async function ClassifiedPage(props: PageProps) {
 
   if (!slug) notFound();
 
-  const classified = await db.classified.findUnique({
+  const classified = await prisma.classified.findUnique({
     where: { slug },
     include: { make: true, images: true },
   });

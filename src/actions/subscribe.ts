@@ -1,5 +1,5 @@
 "use server";
-import { db } from "../../prisma/db";
+import { prisma } from "../../prisma/prisma";
 import { CustomerStatus, Prisma } from "@prisma/client";
 import {
   PrismaClientKnownRequestError,
@@ -18,7 +18,7 @@ export const subscribeAction = async (_: PrevState, formData: FormData) => {
 
     if (!success) return { success: false, message: error.message };
 
-    const subscriber = await db.customer.findFirst({
+    const subscriber = await prisma.customer.findFirst({
       where: {
         email: data.email,
       },
@@ -35,7 +35,7 @@ export const subscribeAction = async (_: PrevState, formData: FormData) => {
       termsAccepted: true,
     };
 
-    await db.customer.create({ data: customerData });
+    await prisma.customer.create({ data: customerData });
 
     return { success: true, message: "Subscribed successfully!" };
   } catch (error) {

@@ -3,7 +3,7 @@ import PageTitle from "../ui/pageTitle";
 import { HomepageFilters } from "./homepage-filters";
 import { SearchButton } from "./searech-button";
 import { AwaitedPageProps } from "@/config/types";
-import { db } from "../../../prisma/db";
+import { prisma } from "../../../prisma/prisma";
 import { buildClassifiedFilterQuery } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -14,10 +14,10 @@ export const HeroSection = async ({ searchParams }: AwaitedPageProps) => {
   const totalFiltersApplied = Object.keys(searchParams || {}).length;
   const isFilterApplied = totalFiltersApplied > 0;
 
-  const classifiedsCount = await db.classified.count({
+  const classifiedsCount = await prisma.classified.count({
     where: buildClassifiedFilterQuery(searchParams),
   });
-  const minMaxResult = await db.classified.aggregate({
+  const minMaxResult = await prisma.classified.aggregate({
     where: {
       status: ClassifiedStatus.LIVE,
     },
@@ -51,7 +51,7 @@ export const HeroSection = async ({ searchParams }: AwaitedPageProps) => {
             Discover your dream car today
           </h2>
         </div>
-        <div className="mx-auto w-full max-w-md bg-white p-6 shadow-lg rounded-xl">
+        <div className="mx-auto w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
           <div className="space-y-4">
             <div className="flex w-full flex-col gap-x-4 space-y-2">
               <HomepageFilters

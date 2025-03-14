@@ -4,7 +4,7 @@ import {
   CreateCustomerSchema,
   CreateCustomerType,
 } from "@/schemas/customer.schema";
-import { db } from "../../prisma/db";
+import { prisma } from "../../prisma/prisma";
 
 export const createCustomerAction = async (props: CreateCustomerType) => {
   try {
@@ -24,7 +24,7 @@ export const createCustomerAction = async (props: CreateCustomerType) => {
       };
     }
     const { date, terms, slug, ...rest } = data;
-    await db.customer.create({
+    await prisma.customer.create({
       data: {
         ...rest,
         bookingDate: date,

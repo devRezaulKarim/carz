@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "../../../../prisma/db";
+import { prisma } from "../../../../prisma/prisma";
 
 export const GET = async (req: NextRequest) => {
   const params = new URL(req.url).searchParams;
   try {
-    const makes = await db.make.findMany({
+    const makes = await prisma.make.findMany({
       select: { id: true, name: true },
       orderBy: { name: "asc" },
     });
 
     let models: { id: number; name: string }[] = [];
     if (params.get("make")) {
-      models = await db.model.findMany({
+      models = await prisma.model.findMany({
         select: { id: true, name: true },
         where: { makeId: Number(params.get("make")) },
         orderBy: { name: "asc" },
@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest) => {
 
     let modelVariants: { id: number; name: string }[] = [];
     if (params.get("make") && params.get("model")) {
-      modelVariants = await db.modelVariant.findMany({
+      modelVariants = await prisma.modelVariant.findMany({
         select: { id: true, name: true },
         where: { modelId: Number(params.get("model")) },
         orderBy: { name: "asc" },

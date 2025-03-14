@@ -1,7 +1,7 @@
 import { CLASSIFIED_PER_PAGE } from "@/config/constants";
 import { Favorites, PageProps } from "@/config/types";
 import { PageSchema } from "@/schemas/page.schema";
-import { db } from "../../../../prisma/db";
+import { prisma } from "../../../../prisma/prisma";
 import { getSourceId } from "@/lib/source-id";
 import { redis } from "@/lib/redis-store";
 import ClassifiedCard from "@/components/inventory/classified-card";
@@ -15,7 +15,7 @@ export default async function FavoritesPage(props: PageProps) {
   const offset = (page - 1) * CLASSIFIED_PER_PAGE;
   const sourceId = await getSourceId();
   const favorites = await redis.get<Favorites>(sourceId ?? "");
-  const classifieds = await db.classified.findMany({
+  const classifieds = await prisma.classified.findMany({
     where: { id: { in: favorites ? favorites.ids : [] } },
     include: {
       images: { take: 1 },
@@ -24,7 +24,7 @@ export default async function FavoritesPage(props: PageProps) {
     take: CLASSIFIED_PER_PAGE,
   });
 
-  const count = await db.classified.count({
+  const count = await prisma.classified.count({
     where: { id: { in: favorites ? favorites.ids : [] } },
   });
 

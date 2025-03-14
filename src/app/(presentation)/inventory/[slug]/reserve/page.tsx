@@ -1,6 +1,6 @@
 import { MultiStepFormEnum, PageProps } from "@/config/types";
 import { notFound } from "next/navigation";
-import { db } from "../../../../../../prisma/db";
+import { prisma } from "../../../../../../prisma/prisma";
 import { Welcome } from "@/components/reserve/welcome";
 import { SelectDate } from "@/components/reserve/select-date";
 import { SubmitDetails } from "@/components/reserve/submit-details";
@@ -28,7 +28,7 @@ export default async function ReservePage(props: PageProps) {
     notFound();
   }
 
-  const classified = await db.classified.findUnique({
+  const classified = await prisma.classified.findUnique({
     where: {
       slug: data.slug,
     },

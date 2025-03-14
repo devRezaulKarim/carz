@@ -1,4 +1,4 @@
-import { db } from "../../prisma/db";
+import { prisma } from "../../prisma/prisma";
 import { comparePassword, hashPassword } from "./bcrypt";
 import { redis } from "./redis-store";
 import nodemailer from "nodemailer";
@@ -50,11 +50,11 @@ export const completeChallenge = async (userId: string, code: string) => {
   if (challenge) {
     const isCorrect = await comparePassword(code, challenge.codeHash);
     if (isCorrect) {
-      const session = await db.session.findFirst({
+      const session = await prisma.session.findFirst({
         where: { userId, requires2FA: true },
       });
       if (session) {
-        await db.session.updateMany({
+        await prisma.session.updateMany({
           where: {
             sessionToken: session.sessionToken,
             userId,

@@ -1,11 +1,11 @@
 import { ClassifiedStatus } from "@prisma/client";
-import { db } from "../../../prisma/db";
+import { prisma } from "../../../prisma/prisma";
 import Link from "next/link";
 import Image from "next/image";
 import { routes } from "@/config/routes";
 
 export const OurBrandsSection = async () => {
-  const brands = await db.make.findMany({
+  const brands = await prisma.make.findMany({
     where: {
       name: {
         in: [
@@ -30,7 +30,7 @@ export const OurBrandsSection = async () => {
     },
   });
 
-  const count = await db.classified.count({
+  const count = await prisma.classified.count({
     where: {
       status: ClassifiedStatus.LIVE,
     },

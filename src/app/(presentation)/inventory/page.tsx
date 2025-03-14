@@ -1,5 +1,5 @@
 import { AwaitedPageProps, Favorites, PageProps } from "@/config/types";
-import { db } from "../../../../prisma/db";
+import { prisma } from "../../../../prisma/prisma";
 import ClassifiedList from "@/components/inventory/classified-list";
 import { getSourceId } from "@/lib/source-id";
 import { redis } from "@/lib/redis-store";
@@ -31,10 +31,10 @@ const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
 const InventoryPage = async (props: PageProps) => {
   const searchParams = await props.searchParams;
   const classifieds = getInventory(searchParams);
-  const count = await db.classified.count({
+  const count = await prisma.classified.count({
     where: buildClassifiedFilterQuery(searchParams),
   });
-  const minMaxResult = await db.classified.aggregate({
+  const minMaxResult = await prisma.classified.aggregate({
     where: {
       status: ClassifiedStatus.LIVE,
     },
