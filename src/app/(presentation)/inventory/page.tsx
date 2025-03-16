@@ -1,0 +1,108 @@
+import { AwaitedPageProps, Favorites, PageProps } from "@/config/types";
+import { prisma } from "../../../../prisma/prisma";
+import ClassifiedList from "@/components/inventory/classified-list";
+import { getSourceId } from "@/lib/source-id";
+import { redis } from "@/lib/redis-store";
+import { CustomPagination } from "@/components/shared/Pagination";
+import { routes } from "@/config/routes";
+import { CLASSIFIED_PER_PAGE } from "@/config/constants";
+import { Sidebar } from "@/components/inventory/sidebar";
+import { ClassifiedStatus } from "@prisma/client";
+import { DialogFilters } from "@/components/inventory/dialog-filters";
+import { PageSchema } from "@/schemas/page.schema";
+import { buildClassifiedFilterQuery } from "@/lib/utils";
+import { Suspense } from "react";
+import { InventorySkeleton } from "@/components/inventory/inventory-skeleton";
+
+const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
+  const validPage = PageSchema.parse(searchParams?.page);
+  const page = validPage ? validPage : 1;
+  const offset = (page - 1) * CLASSIFIED_PER_PAGE;
+  return db.classified.findMany({
+    where: buildClassifiedFilterQuery(searchParams),
+    include: {
+      images: { take: 1 },
+    },
+    skip: offset,
+    take: CLASSIFIED_PER_PAGE,
+  });
+};
+
+const InventoryPage = async (props: PageProps) => {
+  const searchParams = await props.searchParams;
+  const classifieds = getInventory(searchParams);
+  const count = await prisma.classified.count({
+    where: buildClassifiedFilterQuery(searchParams),
+  });
+  const minMaxResult = await prisma.classified.aggregate({
+    where: {
+      status: ClassifiedStatus.LIVE,
+    },
+    _min: {
+      year: true,
+      price: true,
+      odoReading: true,
+    },
+    _max: {
+      year: true,
+      price: true,
+      odoReading: true,
+    },
+  });
+  const sourceId = await getSourceId();
+  const favorites = await redis.get<Favorites>(sourceId ?? "");
+  const totalPages = Math.ceil(count / CLASSIFIED_PER_PAGE);
+
+  return (
+    <div className="flex">
+      <Sidebar minMaxValues={minMaxResult} searchParams={searchParams} />
+      <div className="flex-1 bg-white p-4">
+        <div className="-mt-1 flex flex-col items-center space-y-2 pb-4">
+          <div className="flex w-full items-center justify-between">
+            <h2 className="min-w-fit text-sm font-semibold md:text-base lg:text-xl">
+              We have found {count} classifieds.
+            </h2>
+            <DialogFilters
+              minMaxValues={minMaxResult}
+              searchParams={searchParams}
+              count={count}
+            />
+          </div>
+
+          <CustomPagination
+            baseURL={routes.inventory}
+            totalPages={totalPages}
+            styles={{
+              paginationRoot: "flex justify-end hidden lg:block",
+              paginationLink: "border-none active:border",
+              paginationLinkActive: "bg-primary text-white",
+              paginationNext: "",
+              paginationPrevious: "",
+            }}
+          />
+
+          <Suspense fallback={<InventorySkeleton />}>
+            <ClassifiedList
+              classifieds={classifieds}
+              favorites={favorites ? favorites.ids : []}
+            />
+          </Suspense>
+
+          <CustomPagination
+            baseURL={routes.inventory}
+            totalPages={totalPages}
+            styles={{
+              paginationRoot: "flex justify-center lg:hidden pt-12",
+              paginationLink: "border-none active:border",
+              paginationLinkActive: "bg-primary text-white",
+              paginationNext: "",
+              paginationPrevious: "",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InventoryPage;
