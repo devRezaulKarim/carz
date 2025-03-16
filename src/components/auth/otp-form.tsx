@@ -20,6 +20,7 @@ import {
   resendChallengeAction,
 } from "@/actions/challenge";
 import { toast } from "sonner";
+import { routes } from "@/config/routes";
 
 export const OTPForm = () => {
   const [isCodePending, startCodeTransition] = useTransition();
@@ -33,7 +34,6 @@ export const OTPForm = () => {
   const onSubmit: SubmitHandler<OTPSchemaType> = (data) => {
     startSubmitTransition(async () => {
       const { success, message } = await completeChallengeAction(data.code);
-      console.log("first", { success, message });
       if (!success) {
         toast.error("Error!", {
           description: message,
@@ -42,7 +42,7 @@ export const OTPForm = () => {
           closeButton: true,
         });
       } else {
-        console.log("second", { success, message });
+        router.push(routes.admin.dashboard);
       }
     });
   };

@@ -1,3 +1,4 @@
+import { EmailTemplate } from "../../email/email-template";
 import { prisma } from "../../prisma/prisma";
 import { comparePassword, hashPassword } from "./bcrypt";
 import { redis } from "./redis-store";
@@ -30,7 +31,8 @@ export const issueChallenge = async (userId: string, email: string) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Your 2FA Code",
-      text: `Your authentication code is: ${code}. It will expire in 5 minutes.`,
+      // text: `Your authentication code is: ${code}. It will expire in 5 minutes.`,
+      html: EmailTemplate({ code: code.toString() }),
     });
   } catch (error) {
     throw error;

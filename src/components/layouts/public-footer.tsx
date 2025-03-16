@@ -38,7 +38,7 @@ export const PublicFooter = () => {
             <div className="flex items-center space-x-2">
               <Link href={routes.home} className="flex items-center">
                 <Image
-                  width={120}
+                  width={100}
                   height={64}
                   alt="Logo"
                   className="relative h-8"

@@ -21,7 +21,7 @@ export const PublicHeader = async () => {
       <div className="flex flex-1 items-center">
         <Link href={routes.home} className="flex items-center gap-2">
           <Image
-            width={150}
+            width={120}
             height={64}
             alt="Logo"
             className="relative"
