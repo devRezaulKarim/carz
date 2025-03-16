@@ -31,7 +31,6 @@ export const issueChallenge = async (userId: string, email: string) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Your 2FA Code",
-      // text: `Your authentication code is: ${code}. It will expire in 5 minutes.`,
       html: EmailTemplate({ code: code.toString() }),
     });
   } catch (error) {
