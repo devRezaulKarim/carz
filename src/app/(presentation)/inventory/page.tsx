@@ -18,7 +18,7 @@ const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
   const validPage = PageSchema.parse(searchParams?.page);
   const page = validPage ? validPage : 1;
   const offset = (page - 1) * CLASSIFIED_PER_PAGE;
-  return db.classified.findMany({
+  return prisma.classified.findMany({
     where: buildClassifiedFilterQuery(searchParams),
     include: {
       images: { take: 1 },

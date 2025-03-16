@@ -18,7 +18,10 @@ import { CircleCheckIcon, CircleX, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 
 export const NewsletterForm = () => {
-  const [state, formAction] = useActionState(subscribeAction, undefined);
+  const [state, formAction] = useActionState(subscribeAction, {
+    success: false,
+    message: "",
+  });
 
   const form = useForm({
     resolver: zodResolver(subscribeSchema),
