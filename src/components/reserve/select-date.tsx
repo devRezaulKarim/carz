@@ -17,7 +17,10 @@ import { Button } from "../ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { routes } from "@/config/routes";
 import { generateDateOptions, generateTimeOptions } from "@/lib/utils";
-import { SelectDateSchema, SelectDateType } from "@/schemas/multi-step-form.schema";
+import {
+  SelectDateSchema,
+  SelectDateType,
+} from "@/schemas/multi-step-form.schema";
 
 export const SelectDate = ({
   searchParams,
@@ -54,7 +57,7 @@ export const SelectDate = ({
   //This will be called while submitting the form
   const onSelectDate: SubmitHandler<SelectDateType> = (data) => {
     startTransition(async () => {
-      const valid = form.trigger();
+      const valid = await form.trigger();
       if (!valid) return;
       await new Promise((resolve) => setTimeout(resolve, 500));
 
