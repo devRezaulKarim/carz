@@ -1,3 +1,4 @@
 export default async function AdminClassifiedsPage() {
-  return <>Classifieds</>;
+  return <p>Classifieds</p>;
 }
+export const dynamic = "force-dynamic";

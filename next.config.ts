@@ -10,9 +10,9 @@ const nextConfig: NextConfig = {
     nodeMiddleware: true,
     authInterrupts: true,
     reactCompiler: true,
-    optimizeCss: true,
-    optimizeServerReact: true,
-    optimizePackageImports: ["lucide-react", "date-fns"],
+    // optimizeCss: true,
+    // optimizeServerReact: true,
+    // optimizePackageImports: ["lucide-react", "date-fns"],
   },
   images: {
     remotePatterns: [
