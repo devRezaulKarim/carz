@@ -45,7 +45,7 @@ export const TaxonomyFilters = ({
   return (
     <>
       <Select
-        label="Make"
+        label="Brand"
         name="make"
         value={searchParams?.make as string}
         onChange={handleChange}
