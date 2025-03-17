@@ -1,3 +1,4 @@
 export default async function AdminSettingsPage() {
-  return <>Settings</>;
+  return <p>Settings</p>;
 }
+export const dynamic = "force-dynamic";
