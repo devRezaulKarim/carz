@@ -4,18 +4,21 @@ import { routes } from "./config/routes";
 
 function setRequestHeaders(requestHeaders: Headers) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
-  const cspHeader = `
-      default-src 'self';
-      script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
-      style-src 'self' 'nonce-${nonce}';
-      img-src 'self' blob: data:;
-      font-src 'self';
-      base-uri 'self';
-      object-src 'none';
-      form-action 'self';
-      frame-ancestors 'none';
-      upgrade-insecure-requests;
-  `;
+
+  const cspHeader = [
+    `default-src 'self'`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    `style-src 'self' 'nonce-${nonce}'`,
+    `img-src 'self' blob: data:`,
+    `font-src 'self'`,
+    `base-uri 'self'`,
+    `object-src 'none'`,
+    `form-action 'self'`,
+    `frame-ancestors 'none'`,
+    `upgrade-insecure-requests`,
+    `block-all-mixed-content`, // Recommended addition
+    `require-trusted-types-for 'script'`, // XSS protection
+  ].join("; ");
 
   requestHeaders.set("x-auth-token", `Bearer ${process.env.X_AUTH_TOKEN}`);
 

@@ -18,7 +18,6 @@ import { Button } from "../ui/button";
 export const Welcome = ({ classified }: MultiStepFormComponentProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  console.log(classified);
   const nextStep = () => {
     startTransition(async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
