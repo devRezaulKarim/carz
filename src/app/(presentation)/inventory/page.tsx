@@ -58,28 +58,30 @@ const InventoryPage = async (props: PageProps) => {
       <Sidebar minMaxValues={minMaxResult} searchParams={searchParams} />
       <div className="flex-1 bg-white p-4">
         <div className="-mt-1 flex flex-col items-center space-y-2 pb-4">
-          <div className="flex w-full items-center justify-between">
-            <h2 className="min-w-fit text-sm font-semibold md:text-base lg:text-xl">
-              We have found {count} classifieds.
-            </h2>
-            <DialogFilters
-              minMaxValues={minMaxResult}
-              searchParams={searchParams}
-              count={count}
+          <div className="flex w-full items-center justify-between lg:mb-2">
+            <div className="flex w-full items-center justify-between">
+              <h2 className="min-w-fit text-sm font-semibold md:text-base lg:text-xl">
+                We have found {count} classifieds.
+              </h2>
+              <DialogFilters
+                minMaxValues={minMaxResult}
+                searchParams={searchParams}
+                count={count}
+              />
+            </div>
+
+            <CustomPagination
+              baseURL={routes.inventory}
+              totalPages={totalPages}
+              styles={{
+                paginationRoot: "flex justify-end hidden lg:block",
+                paginationLink: "border-none active:border",
+                paginationLinkActive: "bg-primary text-white",
+                paginationNext: "",
+                paginationPrevious: "",
+              }}
             />
           </div>
-
-          <CustomPagination
-            baseURL={routes.inventory}
-            totalPages={totalPages}
-            styles={{
-              paginationRoot: "flex justify-end hidden lg:block",
-              paginationLink: "border-none active:border",
-              paginationLinkActive: "bg-primary text-white",
-              paginationNext: "",
-              paginationPrevious: "",
-            }}
-          />
 
           <Suspense fallback={<InventorySkeleton />}>
             <ClassifiedList

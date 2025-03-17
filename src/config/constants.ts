@@ -4,70 +4,84 @@ export const imageSource = {
   classifiedPlaceholders: [
     {
       id: 1,
-      placeholder: "https://i.ibb.co.com/xSwKn0ts/car-placeholder.jpg",
-      blurhash: "4PcRHIS6iHiPd4d4hXVZl5CHCQ==",
+      placeholder: "https://i.ibb.co.com/cKByhF4C/car-1.jpg",
+      blurhash: "X8cNLYy5h3VVlYdvd5aZephwhQhX",
     },
     {
       id: 2,
-      placeholder:
-        "https://i.ibb.co.com/7tnRXrtY/2005-BMW-M3-GTR-Need-For-Speed-001-1080.jpg",
-      blurhash: "TQcGDIQIh4h2h3d2iHmLSN978Q==",
+      placeholder: "https://i.ibb.co.com/S4hdScXv/car-2.jpg",
+      blurhash: "TigGHIiJdXhKdIavibRPgrNDBw==",
     },
     {
       id: 3,
-      placeholder:
-        "https://i.ibb.co.com/PzZf2rPp/2024-Audi-E-Concept-001-1080.jpg",
-      blurhash: "1SYKJIhiZVlQqXiXd3hPmAaKeA==",
+      placeholder: "https://i.ibb.co.com/Q32LGj5s/car-3.jpg",
+      blurhash: "2+cFDYSUjoaLiHiHebeof6mQlApJ",
     },
     {
       id: 4,
-      placeholder:
-        "https://i.ibb.co.com/DP9dd95p/2025-Chevrolet-Blazer-EV-R-NASCAR-Concept-001-1080.jpg",
-      blurhash: "UfYFDIBGZlmAaIeEmnELZL9H9Q==",
+      placeholder: "https://i.ibb.co.com/QvQ2S6gt/car-4.jpg",
+      blurhash: "HPgRFYKFiHiPd3h6eGd4h7aQaQqp",
     },
     {
       id: 5,
-      placeholder:
-        "https://i.ibb.co.com/76nNSdH/2025-Mercedes-AMG-GT63-S-E-Performance-4-Door-001-1080.jpg",
-      blurhash: "GQgSFIJ3h4h/d4eKiIl3f3/3xw==",
+      placeholder: "https://i.ibb.co.com/HftSNQcS/car-5.jpg",
+      blurhash: "oUgKLYipd3iPd4duhiiIiJqPqfm5",
     },
     {
       id: 6,
-      placeholder:
-        "https://i.ibb.co.com/7tgNYTJw/2025-Renault-Twingo-E-Tech-Concept-001-1080.jpg",
-      blurhash: "l9cNDIRqaHevhXd6dWffy7mP6Q==",
+      placeholder: "https://i.ibb.co.com/cS30K3wB/car-6.jpg",
+      blurhash: "nTgODYZXdomPdneHmDioeoaAdAY4",
     },
     {
       id: 7,
-      placeholder:
-        "https://i.ibb.co.com/Q3pphvg2/2025-Tesla-Model-Y-001-1080.jpg",
-      blurhash: "ifcFDIICaJhOmHdCjniWoGMJSw==",
+      placeholder: "https://i.ibb.co.com/mCZJxyGH/car-7.jpg",
+      blurhash: "nggOJYJ3hodwZ3h9d4iHhkd3cGQH",
     },
     {
       id: 8,
-      placeholder:
-        "https://i.ibb.co.com/FRWrDCQ/2025-Toyota-GR-Supra-003-1080.jpg",
-      blurhash: "TPcFFIbQkYcHh4mxt3YKlZFRCA==",
+      placeholder: "https://i.ibb.co.com/39Z4hJ9z/car-8.jpg",
+      blurhash: "UQgKFYRIinhwl3h2eGiYg0d5cHQH",
     },
     {
       id: 9,
-      placeholder:
-        "https://i.ibb.co.com/nM1MQP1D/2026-Aston-Martin-Valhalla-006-1080.jpg",
-      blurhash: "IPgJFILQiIiNd3eMhWlUfxb6+A==",
+      placeholder: "https://i.ibb.co.com/bgCtgmmZ/car-9.jpg",
+      blurhash: "0PcJBYBYZniAeoZ1iehYltqNn835",
     },
     {
       id: 10,
-      placeholder:
-        "https://i.ibb.co.com/qLWT1nqF/2026-Rolls-Royce-Spectre-Black-Badge-001-1080.jpg",
-      blurhash: "USgKFIKeZ2nAZZlsiHOdj/T5OQ==",
+      placeholder: "https://i.ibb.co.com/bgq288YC/car-10.jpg",
+      blurhash: "WhgWFYKGiIeAh3d5h5eGiFuJ8Mi8",
+    },
+    {
+      id: 11,
+      placeholder: "https://i.ibb.co.com/fGT5MmPc/car-11.jpg",
+      blurhash: "GwgWDYCKh3iPd4h7h4eGdr+Y8qhZ",
+    },
+    {
+      id: 12,
+      placeholder: "https://i.ibb.co.com/C3zD7njs/car-12.jpg",
+      blurhash: "VVkSJYaId3iPeIeKd2h3d7ufpft5",
+    },
+    {
+      id: 13,
+      placeholder: "https://i.ibb.co.com/spfVQZ2L/car-13.jpg",
+      blurhash: "lOcFBYCASMcRqIVRuveJh5pQlgdm",
+    },
+    {
+      id: 14,
+      placeholder: "https://i.ibb.co.com/mkwcnVJ/car-14.jpg",
+      blurhash: "IvgNDYKHdod/dndvmCeHialwmgnH",
+    },
+    {
+      id: 15,
+      placeholder: "https://i.ibb.co.com/Y4qctDDh/car-15.jpg",
+      blurhash: "G/gRBYBXeHd/d4eLeHeIhvlYl29m",
     },
   ],
-  carLineup:
-    "https://i.ibb.co.com/FqCcbnBp/2022-audi-tt-rs-coupe-heritage-edition-4k-8k-1920x1080.jpg",
-  featured: "https://i.ibb.co.com/k2PYxCRG/view-3d-car-1.jpg",
-  // featured: "https://i.ibb.co.com/N6Yf2gnC/feature-car.jpg",
+  carLineup: "https://i.ibb.co.com/My5kHRgn/hero-bg.webp",
+  featured: "https://i.ibb.co.com/mC4gNwbd/feature-car.webp",
 };
-export const CLASSIFIED_PER_PAGE = 10;
+export const CLASSIFIED_PER_PAGE = 12;
 
 export const navLinks = [
   {
