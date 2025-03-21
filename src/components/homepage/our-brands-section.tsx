@@ -56,6 +56,7 @@ export const OurBrandsSection = async () => {
             >
               <Image
                 fill={true}
+                sizes="120px"
                 src={image}
                 alt={name}
                 className="aspect-square object-contain"

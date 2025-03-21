@@ -72,6 +72,7 @@ const ClassifiedCard = ({ classified, favorites }: ClassifiedCardProps) => {
                 src={classified.images[0].src}
                 alt={classified.images[0].alt}
                 fill={true}
+                sizes="500px"
                 quality={25}
               />
             </Link>

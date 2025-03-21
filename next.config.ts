@@ -40,7 +40,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: `camera=(), microphone=(), geolocation=(), midi=(), sync-xhr=(), fullscreen=(self "${process.env.NEXT_PUBLIC_APP_URL}"), geolocation=(self "${process.env.NEXT_PUBLIC_APP_URL}"),`,
+            value: `camera=(), microphone=(), geolocation=(), midi=(), sync-xhr=(), fullscreen=(self "${process.env.NEXT_PUBLIC_APP_URL}"), geolocation=(self "${process.env.NEXT_PUBLIC_APP_URL}")`,
           },
           {
             key: "Referrer-Policy",
