@@ -79,7 +79,7 @@ export const KPICards = ({ data }: KPICardsProps) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
       {dashboardData.map((item) => (
         <KPICard key={item.id} {...item} />
       ))}
@@ -100,7 +100,9 @@ const KPICard = ({
     <Card key={id} className="border-gray-700 bg-gray-800">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div className="flex flex-col space-y-1">
-          <CardTitle className="text-gray-100 tracking-wider">{title}</CardTitle>
+          <CardTitle className="tracking-wider text-gray-100">
+            {title}
+          </CardTitle>
           <CardDescription className="text-gray-400">
             {description}
           </CardDescription>

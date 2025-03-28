@@ -1,3 +1,4 @@
+import prettYBytes from "pretty-bytes";
 import { AwaitedPageProps } from "@/config/types";
 import { ClassifiedFilterSchema } from "@/schemas/classified.schema";
 import {
@@ -275,4 +276,12 @@ export const calculatePercentageChange = (
 ): number => {
   if (previous === 0) return current > 0 ? 100 : current < 0 ? -100 : 0;
   return ((current - previous) / Math.abs(previous)) * 100;
+};
+
+export const convertToMB = (bytes: number) => {
+  return prettYBytes(bytes, {
+    bits: false,
+    maximumFractionDigits: 1,
+    space: false,
+  });
 };
