@@ -64,20 +64,13 @@ export const CreateClassifiedDialog = () => {
         responseMessage.classified,
       )) {
         if (value) {
-          if (value?.error) {
-            const newValue = { ...value };
-            delete newValue.error;
-            createForm.reset(newValue);
-          } else {
-            createForm.reset(value);
-          }
+          createForm.reset(value);
         }
       }
     });
   };
 
   const onCreateSubmit: SubmitHandler<StreamableSkeletonProps> = (data) => {
-    console.log("data");
     startCreateTransition(async () => {
       setMessages([]);
       const { success, message } = await createClassifiedAction(data);
@@ -94,7 +87,7 @@ export const CreateClassifiedDialog = () => {
   };
 
   return (
-    <Dialog open={true} onOpenChange={() => null}>
+    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>
         <Button size="sm" className="ml-4">
           Create new

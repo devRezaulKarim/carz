@@ -28,8 +28,8 @@ export const Select = ({
           onChange={onChange}
           value={value ?? ""}
           className={cn(
-            selectClassName,
             "custom-select w-full appearance-none rounded-md border border-input bg-no-repeat px-3 py-2 pr-12 focus:outline-none disabled:!bg-gray-100",
+            selectClassName,
           )}
           {...rest}
         >

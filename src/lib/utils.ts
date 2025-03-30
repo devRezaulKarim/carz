@@ -105,7 +105,7 @@ export const formatBodyType = (bodyType: BodyType) => {
   }
 };
 
-export const formatColor = (color: Color) => {
+export const formatColor = (color: Color): string => {
   switch (color) {
     case Color.BLACK:
       return "Black";
@@ -136,13 +136,29 @@ export const formatColor = (color: Color) => {
   }
 };
 
-export const formatULEZCompliance = (ulezCompliance: ULEZCompliance) => {
+export const formatULEZCompliance = (
+  ulezCompliance: ULEZCompliance,
+): string => {
   switch (ulezCompliance) {
     case ULEZCompliance.EXEMPT:
       return "Exempt";
     case ULEZCompliance.NON_EXEMPT:
       return "Non Exempt";
 
+    default:
+      return "Unknown";
+  }
+};
+export const formatClassifiedStatus = (
+  classifiedStatus: ClassifiedStatus,
+): string => {
+  switch (classifiedStatus) {
+    case ClassifiedStatus.LIVE:
+      return "Live";
+    case ClassifiedStatus.SOLD:
+      return "Sold";
+    case ClassifiedStatus.DRAFT:
+      return "Draft";
     default:
       return "Unknown";
   }
@@ -284,4 +300,15 @@ export const convertToMB = (bytes: number) => {
     maximumFractionDigits: 1,
     space: false,
   });
+};
+
+export const generateYears = (minYear: number, maxYear?: number): string[] => {
+  const currentYear = maxYear ? maxYear : new Date().getFullYear();
+  const years: string[] = [];
+
+  for (let year = currentYear; year >= minYear; year--) {
+    years.push(`${year}`);
+  }
+
+  return years;
 };

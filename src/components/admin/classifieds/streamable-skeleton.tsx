@@ -26,7 +26,6 @@ import Image from "next/image";
 export type StreamableSkeletonProps = Partial<Omit<ClassifiedAI, "make">> & {
   make?: Make;
   done?: boolean;
-  error?: string;
 };
 export const StreamableSkeleton = ({
   image,
@@ -44,7 +43,6 @@ export const StreamableSkeleton = ({
   odoUnit,
   make,
   done,
-  error,
 }: StreamableSkeletonProps) => {
   return (
     <div className="container mx-auto flex flex-col py-12">
@@ -216,9 +214,6 @@ export const StreamableSkeleton = ({
           </div>
         </div>
       </div>
-      {error && (
-        <p className="mt-4 text-center text-sm text-red-500">{error}</p>
-      )}
     </div>
   );
 };

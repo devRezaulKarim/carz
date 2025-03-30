@@ -6,7 +6,7 @@ import { PropsWithChildren } from "react";
 export default async function AdminLayout({ children }: PropsWithChildren) {
   return (
     <AI>
-      <div className="flex min-h-screen w-full bg-primary-900">
+      <div className="flex min-h-screen w-full items-start bg-primary-900">
         <AdminSidebar />
         <div className="flex flex-1 flex-col overflow-hidden">
           <AdminHeader />

@@ -13,17 +13,19 @@ export async function mapToiTaxonomyOrCreate(obj: mapToiTaxonomyOrCreateType) {
     where: { name: { equals: obj.make, mode: "insensitive" } },
   });
   if (!make) throw new Error(`Make ${obj.make} not found`);
+  console.log(make);
 
   //attempt to find model
   let model = await prisma.model.findFirst({
-    where: { makeId: make.id, name: { equals: obj.make, mode: "insensitive" } },
+    where: {
+      makeId: make.id,
+      name: { equals: obj.model, mode: "insensitive" },
+    },
   });
-
+  console.log(model);
   if (!model) {
-    model = await prisma.$transaction(async () => {
-      await prisma.$executeRaw`LOCK TABLE "models" IN EXCLUSIVE MODE`;
-
-      return await prisma.model.create({
+    model = await prisma.$transaction(async (tx) => {
+      return await tx.model.create({
         data: {
           name: obj.model,
           make: { connect: { id: make.id } },
@@ -44,10 +46,8 @@ export async function mapToiTaxonomyOrCreate(obj: mapToiTaxonomyOrCreateType) {
     });
 
     if (!modelVariant) {
-      modelVariant = await prisma.$transaction(async () => {
-        await prisma.$executeRaw`LOCK TABLE "model_variant" IN EXCLUSIVE MODE`;
-
-        return await prisma.modelVariant.create({
+      modelVariant = await prisma.$transaction(async (tx) => {
+        return await tx.modelVariant.create({
           data: {
             name: obj.modelVariant as string,
             model: { connect: { id: model.id } },
