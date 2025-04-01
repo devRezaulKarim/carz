@@ -46,6 +46,7 @@ export const AdminTableFooter = ({
     const url = new URL(window.location.href);
     url.search = currentUrlParams.toString();
     router.push(url.toString());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsPerPage]);
 
   return (

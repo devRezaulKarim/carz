@@ -13,7 +13,7 @@ export async function mapToiTaxonomyOrCreate(obj: mapToiTaxonomyOrCreateType) {
     where: { name: { equals: obj.make, mode: "insensitive" } },
   });
   if (!make) throw new Error(`Make ${obj.make} not found`);
-  console.log(make);
+
 
   //attempt to find model
   let model = await prisma.model.findFirst({
@@ -22,7 +22,7 @@ export async function mapToiTaxonomyOrCreate(obj: mapToiTaxonomyOrCreateType) {
       name: { equals: obj.model, mode: "insensitive" },
     },
   });
-  console.log(model);
+
   if (!model) {
     model = await prisma.$transaction(async (tx) => {
       return await tx.model.create({
