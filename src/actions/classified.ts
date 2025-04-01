@@ -162,7 +162,7 @@ export const updateClassifiedAction = async (data: UpdateClassifiedType) => {
           data: imageData,
         });
 
-        const classified = prisma.classified.update({
+        const classified = await prisma.classified.update({
           where: {
             id: data.id,
           },
@@ -174,7 +174,7 @@ export const updateClassifiedAction = async (data: UpdateClassifiedType) => {
             modelId,
             ...(modelVariantId && { modelVariantId }),
             vrm: data.vrm,
-            price: data.price,
+            price: Number(data.price) * 100,
             currency: data.currency,
             odoReading: data.odoReading,
             odoUnit: data.odoUnit,
@@ -211,5 +211,20 @@ export const updateClassifiedAction = async (data: UpdateClassifiedType) => {
     redirect(routes.admin.classifieds);
   } else {
     return { success: false, message: "Failed to update classified" };
+  }
+};
+
+export const deleteClassifiedAction = async (id: number) => {
+  try {
+    await prisma.classified.delete({
+      where: { id },
+    });
+    revalidatePath(routes.admin.classifieds);
+    return { success: true, message: "Classified deleted successfully" };
+  } catch (error) {
+    if (error instanceof Error)
+      return { success: false, message: error.message };
+
+    return { success: true, message: "Something went wrong" };
   }
 };

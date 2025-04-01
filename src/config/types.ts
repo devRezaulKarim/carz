@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Classified, Prisma } from "@prisma/client";
 import { ChangeEvent } from "react";
 
 type Params = { [x: string]: string | string[] | undefined };
@@ -60,3 +60,16 @@ export type PrevState = {
   success: boolean;
   message: string;
 };
+
+export type ClassifiedKeys = keyof Pick<
+  Classified,
+  | "status"
+  | "title"
+  | "vrm"
+  | "id"
+  | "views"
+  | "year"
+  | "color"
+  | "price"
+  | "createdAt"
+>;

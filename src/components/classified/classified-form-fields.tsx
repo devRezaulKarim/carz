@@ -269,6 +269,7 @@ export const ClassifiedFormFields = () => {
         <FormField
           control={form.control}
           name="description"
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           render={({ field: { onChange, ...rest } }) => (
             <FormItem>
               <FormControl>

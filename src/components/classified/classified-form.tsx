@@ -23,19 +23,12 @@ import { Select } from "../ui/select";
 import { MAX_IMAGES } from "@/config/constants";
 import { formatClassifiedStatus } from "@/lib/utils";
 import { MultiImageUploader } from "./multi-image-uploader";
+import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
 
 interface ClassifiedFormProps {
   classified: ClassifiedWithImage;
 }
-
-const extractKey = (url: string) => {
-  // need to be changed as we use different hosting
-  const nextURL = new URL(url);
-  nextURL.href = url;
-  const regex = /uploads\/.+/;
-  const match = url.match(regex);
-  return match ? match[0] : url;
-};
 
 export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {
   const [isPending, startTransition] = useTransition();
@@ -46,17 +39,6 @@ export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {
       odoUnit: OdoUnit.KILOMETERS,
       currency: CurrencyCode.USD,
       images: classified.images ? classified.images : [],
-      // ...(classified && {
-      //   images: classified.images
-      //     ? classified.images.map((image, index) => ({
-      //         ...image,
-      //         id: index + 1,
-      //         percentage: 100,
-      //         key: extractKey(image.src),
-      //         done: true,
-      //       }))
-      //     : [],
-      // }),
       make: classified.makeId.toString(),
       model: classified.modelId.toString(),
       modelVariant: classified.modelVariantId?.toString(),
@@ -77,6 +59,7 @@ export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {
   });
 
   const classifiedFormSubmit: SubmitHandler<UpdateClassifiedType> = (data) => {
+    console.log({ data });
     startTransition(async () => {
       const { success, message } = await updateClassifiedAction(data);
       if (!success) {
@@ -96,6 +79,8 @@ export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {
         <h1 className="mb-6 text-3xl font-bold text-muted">Upload Vehicle</h1>
         <div className="mx-auto grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
           <ClassifiedFormFields />
+
+          {/* Right side image uploader */}
           <div className="space-y-6">
             <FormField
               control={form.control}
@@ -140,6 +125,16 @@ export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {
                 </FormItem>
               )}
             />
+
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="flex w-full items-center gap-2"
+            >
+              {" "}
+              {isPending && <Loader2 className="!h-4 !w-4 animate-spin" />}
+              Submit
+            </Button>
           </div>
         </div>
       </form>
