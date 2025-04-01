@@ -39,7 +39,8 @@ export const RichTextEditor = ({ name, label, config }: TextEditorProps) => {
     autolink_pattern: /^(https?:\/\/|www\.)(.+)$/i,
 
     // Configure paste behavior
-    paste_postprocess: (plugin, args) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    paste_postprocess: (_plugin: any, args: { node: HTMLElement }) => {
       const links = args.node.getElementsByTagName("a");
       for (let i = 0; i < links.length; i++) {
         links[i].style.color = "#3b82f6";
@@ -74,7 +75,7 @@ export const RichTextEditor = ({ name, label, config }: TextEditorProps) => {
         {...config}
         init={init}
         initialValue={value}
-        apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+        apiKey={process.env.NEXT_TINYMCE_API_KEY}
         onEditorChange={handleEditorChange}
       />
     </div>

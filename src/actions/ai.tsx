@@ -73,7 +73,6 @@ export const generateClassified = async (
     classified.title = `${taxonomy.year} ${taxonomy?.make} ${taxonomy?.model} ${
       taxonomy?.modelVariant ? taxonomy.modelVariant : ""
     }`.trim();
-    console.log(taxonomy);
     const foundTaxonomy = await mapToiTaxonomyOrCreate({
       year: taxonomy.year,
       make: taxonomy.make,

@@ -24,7 +24,6 @@ export const InputSelect = ({
   selectName,
   label,
   options,
-  prefix,
   className,
   ...numberInputProps
 }: InputSelectProps) => {
