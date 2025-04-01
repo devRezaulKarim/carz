@@ -61,7 +61,7 @@ const InventoryPage = async (props: PageProps) => {
           <div className="flex w-full items-center justify-between lg:mb-2">
             <div className="flex w-full items-center justify-between">
               <h2 className="min-w-fit text-sm font-semibold md:text-base lg:text-xl">
-                We have found {count} classifieds.
+               {`We have found ${count} classified${count>1 "s":""}.`}
               </h2>
               <DialogFilters
                 minMaxValues={minMaxResult}
