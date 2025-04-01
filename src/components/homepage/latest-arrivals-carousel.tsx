@@ -1,6 +1,5 @@
 "use client";
 
-import { Prisma } from "@prisma/client";
 import dynamic from "next/dynamic";
 import { ClassifiedCardSkeleton } from "../inventory/classified-card-skeleton";
 import { Navigation } from "swiper/modules";
@@ -8,6 +7,7 @@ import { SwiperSlide } from "swiper/react";
 import ClassifiedCard from "../inventory/classified-card";
 import { SwiperButtons } from "../shared/swiper-buttons";
 import "swiper/css";
+import { ClassifiedWithImage } from "@/config/types";
 
 const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
   ssr: false,
@@ -21,7 +21,7 @@ const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
 });
 
 interface CarouselProps {
-  classifieds: Prisma.ClassifiedGetPayload<{ include: { images: true } }>[];
+  classifieds: ClassifiedWithImage[];
   favorites: number[];
 }
 

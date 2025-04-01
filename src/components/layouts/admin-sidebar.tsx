@@ -65,7 +65,7 @@ export const AdminSidebar = () => {
   };
   return (
     <motion.div
-      className="flex h-screen flex-col overflow-hidden bg-black/20"
+      className="sticky left-0 top-0 flex min-h-screen flex-col overflow-hidden bg-black/20"
       animate={isSidebarExpanded ? "expanded" : "collapsed"}
       variants={sidebarVariants}
       initial="collapsed"
