@@ -23,6 +23,7 @@ const getInventory = async (searchParams: AwaitedPageProps["searchParams"]) => {
     include: {
       images: { take: 1 },
     },
+    orderBy: { updatedAt: "desc" },
     skip: offset,
     take: CLASSIFIED_PER_PAGE,
   });
