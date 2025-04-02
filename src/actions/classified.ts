@@ -97,7 +97,7 @@ export const createClassifiedAction = async (data: StreamableSkeletonProps) => {
 
   if (success && classifiedId) {
     revalidatePath(routes.admin.classifieds);
-    redirect(routes.admin.editClassifieds(classifiedId));
+    redirect(routes.admin.editClassified(classifiedId));
   } else {
     return { success: false, message: "Failed to create classified" };
   }

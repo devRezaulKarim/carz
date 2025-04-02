@@ -21,12 +21,32 @@ export type ClassifiedsTableSortType = z.infer<
   typeof ClassifiedsTableSortSchema
 >;
 
+export const CustomersTableSortSchema = z.object({
+  order: z.enum(["asc", "desc"]).default("desc"),
+  sort: z
+    .enum([
+      "id",
+      "email",
+      "mobile",
+      "firstName",
+      "lastName",
+      "updatedAt",
+      "createdAt",
+      "status",
+      "bookingDate",
+      "classified",
+    ])
+    .default("createdAt"),
+});
+
+export type CustomersTableSortType = z.infer<typeof CustomersTableSortSchema>;
+
 interface ValidateSortOrderArgs<TSchemaType> {
   sort: string;
   order: string;
   schema: TSchemaType extends ClassifiedsTableSortType
     ? typeof ClassifiedsTableSortSchema
-    : typeof ClassifiedsTableSortSchema;
+    : typeof CustomersTableSortSchema;
 }
 
 export function validateSortOrder<TSchemaType>(

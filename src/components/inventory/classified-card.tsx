@@ -1,6 +1,6 @@
 "use client";
 import { routes } from "@/config/routes";
-import { ClassifiedWithImage, MultiStepFormEnum } from "@/config/types";
+import { ClassifiedWithImages, MultiStepFormEnum } from "@/config/types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -13,11 +13,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { formatNumber, formatPrice } from "@/lib/utils";
 
 interface ClassifiedCardProps {
-  classified: ClassifiedWithImage;
+  classified: ClassifiedWithImages;
   favorites: number[];
 }
 
-const getKeyClassifiedInfo = (classified: ClassifiedWithImage) => {
+const getKeyClassifiedInfo = (classified: ClassifiedWithImages) => {
   return [
     {
       id: "odoReading",

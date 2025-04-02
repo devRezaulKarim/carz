@@ -25,7 +25,7 @@ export const RadioFilter = ({ items, searchParams }: RadioFilterProps) => {
     <RadioGroup
       onValueChange={handleStatus}
       defaultValue="all"
-      className="flex items-center gap-4"
+      className="flex flex-wrap items-center"
     >
       {items.map((item) => (
         <Label

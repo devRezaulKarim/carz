@@ -7,7 +7,7 @@ import { SwiperSlide } from "swiper/react";
 import ClassifiedCard from "../inventory/classified-card";
 import { SwiperButtons } from "../shared/swiper-buttons";
 import "swiper/css";
-import { ClassifiedWithImage } from "@/config/types";
+import { ClassifiedWithImages } from "@/config/types";
 
 const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
   ssr: false,
@@ -21,7 +21,7 @@ const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
 });
 
 interface CarouselProps {
-  classifieds: ClassifiedWithImage[];
+  classifieds: ClassifiedWithImages[];
   favorites: number[];
 }
 

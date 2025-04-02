@@ -2,10 +2,10 @@
 
 import React, { use } from "react";
 import ClassifiedCard from "./classified-card";
-import { ClassifiedWithImage } from "@/config/types";
+import { ClassifiedWithImages } from "@/config/types";
 
 interface ClassifiedsListProps {
-  classifieds: Promise<ClassifiedWithImage[]>;
+  classifieds: Promise<ClassifiedWithImages[]>;
   favorites: number[];
 }
 

@@ -1,9 +1,8 @@
 import { RadioFilter } from "@/components/shared/radio-filter";
 import { AwaitedPageProps } from "@/config/types";
-import { ClassifiedStatus } from "@prisma/client";
-import { CreateClassifiedDialog } from "./create-classified-dialog";
+import { CustomerStatus } from "@prisma/client";
 
-export const AdminClassifiedsHeader = ({ searchParams }: AwaitedPageProps) => {
+export const AdminCustomersHeader = ({ searchParams }: AwaitedPageProps) => {
   return (
     <div className="flex flex-col space-y-4 p-6 text-muted">
       <div className="flex flex-wrap items-center justify-between gap-y-4">
@@ -11,9 +10,8 @@ export const AdminClassifiedsHeader = ({ searchParams }: AwaitedPageProps) => {
         <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">
           <RadioFilter
             searchParams={searchParams}
-            items={["ALL", ...Object.values(ClassifiedStatus)]}
+            items={["ALL", ...Object.values(CustomerStatus)]}
           />
-          <CreateClassifiedDialog />
         </div>
       </div>
     </div>

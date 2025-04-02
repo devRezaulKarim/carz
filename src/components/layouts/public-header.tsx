@@ -42,7 +42,10 @@ export const PublicHeader = async () => {
       </nav>
       {session ? (
         <div className="hidden items-center gap-x-6 md:flex">
-          <Link href={routes.admin.dashboard} className="text-foreground">
+          <Link
+            href={routes.admin.dashboard}
+            className="group rounded px-3 py-2 font-heading text-base font-semibold uppercase text-foreground transition-all duration-300 ease-in-out hover:text-primary"
+          >
             Back office
           </Link>
           <SignOutForm />

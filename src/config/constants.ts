@@ -1,4 +1,4 @@
-import { ClassifiedStatus } from "@prisma/client";
+import { ClassifiedStatus, CustomerStatus } from "@prisma/client";
 import { routes } from "./routes";
 import { BadgeProps } from "@/components/ui/badge";
 
@@ -102,6 +102,7 @@ export const SESSION_MAX_AGE = 7 * 24 * 60 * 60 * 1000; //7 days in ms
 export const MAX_IMAGE_SIZE = 20 * 1000 * 1000; //2 MB
 export const MAX_IMAGES = 20;
 export const sortOrder = ["asc", "desc"] as const;
+
 export const ClassifiedBadgeMap: Record<
   ClassifiedStatus,
   BadgeProps["variant"]
@@ -109,4 +110,12 @@ export const ClassifiedBadgeMap: Record<
   [ClassifiedStatus.DRAFT]: "secondary",
   [ClassifiedStatus.LIVE]: "default",
   [ClassifiedStatus.SOLD]: "destructive",
+};
+
+export const CustomerBadgeMap: Record<CustomerStatus, BadgeProps["variant"]> = {
+  [CustomerStatus.COLD]: "secondary",
+  [CustomerStatus.CONTACTED]: "default",
+  [CustomerStatus.INTERESTED]: "destructive",
+  [CustomerStatus.PURCHASED]: "info",
+  [CustomerStatus.SUBSCRIBER]: "warning",
 };

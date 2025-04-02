@@ -38,10 +38,10 @@ export const HeroSection = async ({ searchParams }: AwaitedPageProps) => {
         background: `url(${imageSource.carLineup})`,
         backgroundPosition: "center",
       }}
-      className="relative flex h-[calc(100vh-4rem)] items-center justify-center bg-cover"
+      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-cover"
     >
       <div className="absolute inset-0 bg-black opacity-75"></div>
-      <div className="container relative z-10 grid-cols-2 items-center space-y-12 lg:grid">
+      <div className="container relative z-10 grid-cols-2 items-center space-y-12 py-10 md:py-0 lg:grid">
         <div className="px-10 lg:px-0">
           <PageTitle
             text="Unbeatable Deals on New & Used cars"

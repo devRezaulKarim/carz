@@ -178,7 +178,7 @@ export const ClassifiedsTableHeader = ({
             />
           </div>
         </TableHead>
-        <TableHead className="w-[100px] text-center text-gray-400">
+        <TableHead className="min-w-[100px] text-center text-gray-400">
           Actions
         </TableHead>
       </TableRow>
