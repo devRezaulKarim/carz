@@ -70,10 +70,11 @@ export const AdminTableFooter = ({
               styles={{
                 paginationRoot: "justify-end",
                 paginationPrevious:
-                  "border-none hover:bg-primary-800 text-gray-300",
-                paginationNext: "hover:bg-primary-800 text-gray-300",
+                  "border-none hover:bg-primary-800 text-gray-300 hover:text-gray-200",
+                paginationNext:
+                  "hover:bg-primary-800 text-gray-300 hover:text-gray-200",
                 paginationLink:
-                  "border-none hover:bg-primary-800 text-gray-300",
+                  "border-none hover:bg-primary-800 text-gray-300 hover:text-gray-200",
                 paginationLinkActive: "bg-primary-800 text-white",
               }}
             />

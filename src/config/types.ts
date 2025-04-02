@@ -12,9 +12,15 @@ export type AwaitedPageProps = {
   searchParams?: Awaited<PageProps["searchParams"]>;
 };
 
-export type ClassifiedWithImage = Prisma.ClassifiedGetPayload<{
+export type ClassifiedWithImages = Prisma.ClassifiedGetPayload<{
   include: {
     images: true;
+  };
+}>;
+
+export type CustomerWithClassifieds = Prisma.CustomerGetPayload<{
+  include: {
+    classified: true;
   };
 }>;
 
@@ -72,4 +78,18 @@ export type ClassifiedKeys = keyof Pick<
   | "color"
   | "price"
   | "createdAt"
+>;
+
+export type CustomerKeys = keyof Pick<
+  Prisma.CustomerGetPayload<{ include: { classified: true } }>,
+  | "id"
+  | "email"
+  | "mobile"
+  | "firstName"
+  | "lastName"
+  | "updatedAt"
+  | "createdAt"
+  | "status"
+  | "bookingDate"
+  | "classified"
 >;

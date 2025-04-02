@@ -5,6 +5,8 @@ import {
   CreateCustomerType,
 } from "@/schemas/customer.schema";
 import { prisma } from "../../prisma/prisma";
+import { revalidatePath } from "next/cache";
+import { routes } from "@/config/routes";
 
 export const createCustomerAction = async (props: CreateCustomerType) => {
   try {
@@ -48,5 +50,20 @@ export const createCustomerAction = async (props: CreateCustomerType) => {
       success: false,
       message: "Something went wrong!",
     };
+  }
+};
+
+export const deleteCustomerAction = async (id: number) => {
+  try {
+    await prisma.customer.delete({
+      where: { id },
+    });
+    revalidatePath(routes.admin.customers);
+    return { success: true, message: "Customer deleted successfully" };
+  } catch (error) {
+    if (error instanceof Error)
+      return { success: false, message: error.message };
+
+    return { success: true, message: "Something went wrong" };
   }
 };

@@ -1,6 +1,6 @@
 "use client";
 import { updateClassifiedAction } from "@/actions/classified";
-import { ClassifiedWithImage } from "@/config/types";
+import { ClassifiedWithImages } from "@/config/types";
 import {
   UpdateClassifiedType,
   updateClassifiedSchema,
@@ -27,7 +27,7 @@ import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 
 interface ClassifiedFormProps {
-  classified: ClassifiedWithImage;
+  classified: ClassifiedWithImages;
 }
 
 export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {

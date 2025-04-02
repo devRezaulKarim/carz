@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { ClassifiedBadgeMap } from "@/config/constants";
-import { ClassifiedWithImage } from "@/config/types";
+import { ClassifiedWithImages } from "@/config/types";
 import { formatClassifiedStatus, formatColor, formatPrice } from "@/lib/utils";
 import { format } from "date-fns";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { ClassifiedsActionButtons } from "./classifieds-action-buttons";
 export const ClassifiedsTableRow = ({
   classified,
 }: {
-  classified: ClassifiedWithImage;
+  classified: ClassifiedWithImages;
 }) => {
   return (
     <TableRow className="border-white/75 text-gray-300 hover:bg-transparent">
