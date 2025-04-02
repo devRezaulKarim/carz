@@ -46,7 +46,7 @@ export const AdminTableFooter = ({
     const url = new URL(window.location.href);
     url.search = currentUrlParams.toString();
     router.push(url.toString());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsPerPage]);
 
   return (
@@ -60,9 +60,9 @@ export const AdminTableFooter = ({
               onChange={handleItemsPerPage}
               options={itemsPerPageOptions}
               disabled={disabled}
-              className="-mt-1"
+              className="-mt-1 min-w-[90px]"
               noDefault={true}
-              selectClassName="!bg-primary-800 text-gray-300 border-primary-800"
+              selectClassName="!bg-primary-800 text-gray-300 border-primary-800 disabled:!bg-gray-600"
             />
             <CustomPagination
               totalPages={totalPages}

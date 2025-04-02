@@ -23,7 +23,9 @@ type SalesChartProps = {
   data: ChartDataType;
 };
 export const SalesChart = ({ data }: SalesChartProps) => {
-  const chartData = use(data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const chartData = use<any[] | undefined>(data);
+
   return (
     <Card className="mb-6 border-gray-700 bg-gray-800">
       <CardHeader>
@@ -35,8 +37,8 @@ export const SalesChart = ({ data }: SalesChartProps) => {
           Number of cars sold per month
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+      <CardContent className="overflow-x-auto">
+        <ResponsiveContainer width="100%" minWidth={500} height={300}>
           <BarChart data={chartData}>
             <XAxis
               dataKey="month"
