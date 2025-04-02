@@ -10,6 +10,7 @@ export const LatestArrivals = async () => {
     where: {
       status: ClassifiedStatus.LIVE,
     },
+    orderBy: { updatedAt: "desc" },
     take: 6,
     include: {
       images: true,
