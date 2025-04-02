@@ -17,7 +17,15 @@ export default async function ClassifiedPage(props: PageProps) {
     include: { make: true, images: true },
   });
   if (!classified) notFound();
-  if (classified.status === ClassifiedStatus.SOLD)
+  if (classified.status === ClassifiedStatus.SOLD) {
     redirect(routes.notAvailable(slug));
+  }
+
+  // handling the views count
+  await prisma.classified.update({
+    where: { id: classified?.id },
+    data: { views: Number(classified.views) + 1 },
+  });
+
   return <ClassifiedView {...classified} />;
 }
