@@ -50,7 +50,6 @@ This is a comprehensive car dealership platform built with Next.js, Prisma, and 
 ### Prerequisites
 
 *   [Node.js](https://nodejs.org/) (v18 or later)
-*   [pnpm](https://pnpm.io/)
 *   [Docker](https://www.docker.com/) (for running a local PostgreSQL instance)
 
 ### Installation
@@ -65,7 +64,7 @@ This is a comprehensive car dealership platform built with Next.js, Prisma, and 
 2.  **Install dependencies:**
 
     ```bash
-    pnpm install
+    npm install
     ```
 
 3.  **Set up environment variables:**
@@ -91,19 +90,19 @@ This is a comprehensive car dealership platform built with Next.js, Prisma, and 
 5.  **Run database migrations:**
 
     ```bash
-    pnpm prisma migrate dev
+    npm prisma migrate dev
     ```
 
 6.  **Seed the database:**
 
     ```bash
-    pnpm prisma db seed
+    npm prisma db seed
     ```
 
 ### Running the Application
 
 ```bash
-pnpm dev
+npm dev
 ```
 
 The application will be available at `http://localhost:3000`.
