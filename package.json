@@ -43,7 +43,7 @@
     "ky": "^1.7.5",
     "lucide-react": "^0.474.0",
     "mime-types": "^3.0.1",
-    "next": "^15.3.0-canary.8",
+    "next": "16.1.1",
     "next-auth": "^5.0.0-beta.25",
     "next-themes": "^0.4.4",
     "nextjs-toploader": "^3.7.15",
@@ -51,8 +51,8 @@
     "nuqs": "^2.4.0",
     "pretty-bytes": "^6.1.1",
     "prisma": "^6.4.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-hook-form": "^7.54.2",
     "react-number-format": "^5.4.3",
     "react-tooltip": "^5.28.0",
@@ -76,11 +76,11 @@
     "@types/fslightbox-react": "^1.7.8",
     "@types/mime-types": "^2.1.4",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
     "@types/sanitize-html": "^2.13.0",
     "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "16.1.1",
     "postcss": "^8",
     "prettier": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
@@ -95,5 +95,9 @@
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/seed.ts"
+  },
+  "overrides": {
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3"
   }
 }

@@ -73,7 +73,7 @@ const ClassifiedCard = ({ classified, favorites }: ClassifiedCardProps) => {
                 alt={classified.images[0].alt}
                 fill={true}
                 sizes="500px"
-                quality={25}
+                quality={100}
               />
             </Link>
             <FavoriteButton

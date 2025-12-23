@@ -7,9 +7,7 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
   experimental: {
-    nodeMiddleware: true,
     authInterrupts: true,
-    reactCompiler: true,
     // optimizeCss: true,
     // optimizeServerReact: true,
     // optimizePackageImports: ["lucide-react", "date-fns"],
@@ -17,7 +15,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "*",
+        protocol: "https",
+        hostname: "**",
       },
     ],
   },
