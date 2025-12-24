@@ -81,7 +81,7 @@ export const OTPForm = () => {
     <div className="flex min-h-[calc(100vh-4rem)] w-full flex-1 justify-center px-6 pt-10 lg:items-center lg:pt-0">
       <div className="flex w-full max-w-lg flex-col">
         <h3 className="mb-4 text-center text-4xl capitalize lg:text-5xl">
-          One time password
+          One time password updated
         </h3>
         <p className="mb-12 text-center text-slate-500">
           Enter the six digit code sent to your email.
