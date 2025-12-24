@@ -2,8 +2,8 @@
 
 import { OTPSchema, OTPSchemaType } from "@/schemas/otp-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   Form,
@@ -25,7 +25,6 @@ import { routes } from "@/config/routes";
 export const OTPForm = () => {
   const [isCodePending, startCodeTransition] = useTransition();
   const [isSubmitPending, startSubmitTransition] = useTransition();
-  const [sendButtonText, setSendButtonText] = useState<string>("Send code");
 
   const router = useRouter();
   const form = useForm<OTPSchemaType>({
@@ -35,8 +34,7 @@ export const OTPForm = () => {
     startSubmitTransition(async () => {
       const { success, message } = await completeChallengeAction(data.code);
       if (success) {
-        // router.push(routes.admin.dashboard);
-        redirect(routes.admin.dashboard);
+        router.push(routes.admin.dashboard);
       } else {
         toast.error("Error!", {
           description: message,
@@ -51,7 +49,6 @@ export const OTPForm = () => {
   const sendCode = () => {
     startCodeTransition(async () => {
       const { success, message } = await resendChallengeAction();
-      setSendButtonText("Resend code");
 
       if (!success) {
         toast.error("Error!", {
@@ -72,14 +69,11 @@ export const OTPForm = () => {
     });
   };
 
-  useEffect(() => {
-    if (isCodePending) setSendButtonText("Sending...");
-  }, [isCodePending]);
   return (
     <div className="flex min-h-[calc(100vh-4rem)] w-full flex-1 justify-center px-6 pt-10 lg:items-center lg:pt-0">
       <div className="flex w-full max-w-lg flex-col">
         <h3 className="mb-4 text-center text-4xl capitalize lg:text-5xl">
-          One time password updated
+          One time password
         </h3>
         <p className="mb-12 text-center text-slate-500">
           Enter the six digit code sent to your email.
@@ -111,7 +105,7 @@ export const OTPForm = () => {
                 ) : (
                   <RotateCw className="!h-6 !w-6 text-gray-500 transition-colors duration-200 group-hover:text-primary" />
                 )}
-                {sendButtonText}
+                Resend code
               </button>
             </div>
             <div className="mt-6 flex w-full flex-col gap-4 md:mt-16">
