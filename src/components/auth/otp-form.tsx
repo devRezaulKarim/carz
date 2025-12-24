@@ -34,7 +34,7 @@ export const OTPForm = () => {
     startSubmitTransition(async () => {
       const { success, message } = await completeChallengeAction(data.code);
       if (success) {
-        router.push(routes.admin.dashboard);
+        router.refresh();
       } else {
         toast.error("Error!", {
           description: message,
