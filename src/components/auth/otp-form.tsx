@@ -32,6 +32,7 @@ export const OTPForm = () => {
     resolver: zodResolver(OTPSchema),
   });
   const onSubmit: SubmitHandler<OTPSchemaType> = (data) => {
+    console.log({ data });
     startSubmitTransition(async () => {
       const { success, message } = await completeChallengeAction(data.code);
       console.log({ success, message });
