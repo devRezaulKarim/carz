@@ -32,20 +32,18 @@ export const OTPForm = () => {
     resolver: zodResolver(OTPSchema),
   });
   const onSubmit: SubmitHandler<OTPSchemaType> = (data) => {
-    console.log({ data });
     startSubmitTransition(async () => {
       const { success, message } = await completeChallengeAction(data.code);
-      console.log({ success, message });
-      if (!success) {
+      if (success) {
+        // router.push(routes.admin.dashboard);
+        redirect(routes.admin.dashboard);
+      } else {
         toast.error("Error!", {
           description: message,
           duration: 3000,
           position: "top-right",
           closeButton: true,
         });
-      } else {
-        // router.push(routes.admin.dashboard);
-        redirect(routes.admin.dashboard);
       }
     });
   };
