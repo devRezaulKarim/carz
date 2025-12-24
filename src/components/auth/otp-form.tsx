@@ -2,7 +2,7 @@
 
 import { OTPSchema, OTPSchemaType } from "@/schemas/otp-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -42,7 +42,8 @@ export const OTPForm = () => {
           closeButton: true,
         });
       } else {
-        router.push(routes.admin.dashboard);
+        // router.push(routes.admin.dashboard);
+        redirect(routes.admin.dashboard);
       }
     });
   };
