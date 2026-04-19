@@ -59,7 +59,6 @@ export const ClassifiedForm = ({ classified }: ClassifiedFormProps) => {
   });
 
   const classifiedFormSubmit: SubmitHandler<UpdateClassifiedType> = (data) => {
-    console.log({ data });
     startTransition(async () => {
       const { success, message } = await updateClassifiedAction(data);
       if (!success) {

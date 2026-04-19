@@ -50,7 +50,7 @@ export const generateClassified = async (
 
   async function processEvent() {
     const { object: taxonomy } = await generateObject({
-      model: openai("gpt-4o", {
+      model: openai.chat("gpt-4o", {
         structuredOutputs: true,
       }),
       schema: classifiedTaxonomyAISchema,
@@ -98,7 +98,7 @@ export const generateClassified = async (
     uiStream.update(<StreamableSkeleton {...classified} />);
 
     const { object: details } = await generateObject({
-      model: openai("gpt-4o", { structuredOutputs: true }),
+      model: openai.chat("gpt-4o", { structuredOutputs: true }),
       schema: classifiedDetailsAISchema,
       system:
         "You are an expert at writing vehicle descriptions and generating structured data",
